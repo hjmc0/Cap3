@@ -1,4 +1,4 @@
-package com.uob.cap3;
+package com.uob.cap3.entities;
 
 import java.sql.Timestamp;
 
@@ -27,7 +27,7 @@ public class Transaction {
     private Timestamp transDate;
     private String transType;
 
-    
+
     private Long accountId;
     private Double amount;
 

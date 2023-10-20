@@ -1,4 +1,4 @@
-package com.uob.cap3;
+package com.uob.cap3.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

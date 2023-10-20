@@ -37,7 +37,7 @@ public class SecurityConfig {
                                             , "/createteller"
                                             , "/createaccount"
                                             , "/save").authenticated())
-                .formLogin(fl -> fl.permitAll())
+                .formLogin(fl -> fl.loginPage("/login").successForwardUrl("/view"))
                 .logout((logout) -> logout.logoutSuccessUrl("/login"))
                 .csrf(csrf -> csrf.disable());
         return http.build();}

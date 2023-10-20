@@ -16,7 +16,6 @@ import com.uob.cap3.repo.AccountRepo;
 import com.uob.cap3.entities.Account;
 import com.uob.cap3.repo.AccountRepo;
 
-
 @Controller
 public class BankController {
     @Autowired
@@ -28,7 +27,7 @@ public class BankController {
     }
 
     @RequestMapping("/login")
-    public String loginPage() {
+    public String loginPage(){
         return "login";
     }
 

@@ -1,11 +1,21 @@
 package com.uob.cap3;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.uob.cap3.entities.Account;
+import com.uob.cap3.repo.AccountRepo;
+
+
 @Controller
 public class BankController {
+    @Autowired
+    AccountRepo ar;
 
     @RequestMapping("/")
     public String landing() {
@@ -18,7 +28,8 @@ public class BankController {
     }
 
     @RequestMapping("/view")
-    public String viewPage() {
+    public String viewPage(Model m) {
+        m.addAttribute("accounts", (List<Account>) ar.findAll());
         return "view";
     }
 

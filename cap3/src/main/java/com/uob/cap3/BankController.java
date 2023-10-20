@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,19 +13,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.uob.cap3.entities.Account;
 import com.uob.cap3.repo.AccountRepo;
 
+import com.uob.cap3.entities.Account;
+import com.uob.cap3.repo.AccountRepo;
+
+
 @Controller
 public class BankController {
-
     @Autowired
     AccountRepo ar;
-    
+
+    @RequestMapping("/")
+    public String landing() {
+        return "index";
+    }
+
     @RequestMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         return "login";
     }
 
     @RequestMapping("/view")
-    public String viewPage(){
+    public String viewPage(Model m) {
+        m.addAttribute("accounts", (List<Account>) ar.findAll());
         return "view";
     }
 
@@ -33,17 +44,17 @@ public class BankController {
     }
 
     @RequestMapping("/transaction/{id}")
-    public String transactionPage(@PathVariable int id){
+    public String transactionPage(@PathVariable int id) {
         return "transaction";
     }
 
     @RequestMapping("/createteller")
-    public String createTeller(){
+    public String createTeller() {
         return "createteller";
     }
 
     @RequestMapping("/createaccount")
-    public String createAccount(){
+    public String createAccount() {
         return "createaccount";
     }
     

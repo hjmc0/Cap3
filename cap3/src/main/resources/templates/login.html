@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en" data-bs-theme="auto" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <link href="../static/css/login.css" rel="stylesheet" />
-    <script src="../static/assets/color-modes.js"></script>
-    <div th:replace="~{components :: links}"></div>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Welcome to Cecil Street</title>
+    <link href="../static/css/login.css" rel="stylesheet" />
+    <script src="../static/assets/color-modes.js"></script>
+    <div th:replace="~{components :: links}"></div>
 
     <style>
       .bd-placeholder-img {
@@ -102,7 +102,7 @@
             id="floatingInput"
             placeholder="Name"
           />
-          <label for="floatingInput">Email address</label>
+          <label for="floatingInput">Teller Name</label>
         </div>
         <div class="form-floating">
           <input

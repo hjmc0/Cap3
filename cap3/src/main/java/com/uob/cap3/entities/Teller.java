@@ -1,4 +1,4 @@
-package com.uob.cap3;
+package com.uob.cap3.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,9 +16,9 @@ public class Teller {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tid;
+    private Long tellerId;
     
-    private String tname;
-    private String tpass;
+    private String tellerName;
+    private String tellerPass;
     
 }

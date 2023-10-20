@@ -28,6 +28,6 @@ public class Account {
     private Double balance;
     private String status;
 
-    @OneToMany(mappedBy = "Account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<Transaction> transactions;
 }

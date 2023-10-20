@@ -26,10 +26,12 @@ public class Transaction {
 
     private Timestamp transDate;
     private String transType;
+
+    
     private Long accountId;
     private Double amount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accountId")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "accountId", insertable = false, updatable = false)
     private Account account;
 }

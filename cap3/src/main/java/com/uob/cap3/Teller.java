@@ -16,9 +16,9 @@ public class Teller {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tid;
+    private Long tellerId;
     
-    private String tname;
-    private String tpass;
+    private String tellerName;
+    private String tellerPass;
     
 }

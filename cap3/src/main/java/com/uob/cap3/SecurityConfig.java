@@ -1,5 +1,6 @@
 package com.uob.cap3;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -16,39 +17,35 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
+
     // @Bean
     // UserDetailsService userDetailsService(PasswordEncoder encoder){
-    //     UserDetails admin = User.withUsername("admin").password(encoder.encode("pass")).roles("ADMIN").build();
-    //     return new InMemoryUserDetailsManager(admin);
+    // UserDetails admin =
+    // User.withUsername("admin").password(encoder.encode("pass")).roles("ADMIN").build();
+    // return new InMemoryUserDetailsManager(admin);
     // }
-
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-
-            http.authorizeHttpRequests(auth -> auth.requestMatchers("/logout", "/login").permitAll()
-                .requestMatchers( "/"
-                                            , "/view"
-                                            , "/edit/*"
-                                            , "/withdraw/*"
-                                            , "/deposit/*"
-                                            , "/transaction/*"
-                                            , "/createteller"
-                                            , "/createaccount"
-                                            , "/save").authenticated())
+        http.authorizeHttpRequests(
+                auth -> auth.requestMatchers("/css/**", "/js/**").permitAll()
+                        .requestMatchers("/logout", "/login").permitAll()
+                        .requestMatchers("/", "/view", "/edit/*", "/withdraw/*", "/deposit/*", "/transaction/*",
+                                "/createteller", "/createaccount", "/save")
+                        .authenticated())
                 .formLogin(fl -> fl.loginPage("/login").successForwardUrl("/view"))
                 .logout((logout) -> logout.logoutSuccessUrl("/login"))
                 .csrf(csrf -> csrf.disable());
-        return http.build();}
+        return http.build();
+    }
 
-            @Bean
+    @Bean
     UserDetailsService tellerDetailsService() {
         return new TellerDetailsServiceImpl();
     }
 
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

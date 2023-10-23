@@ -30,7 +30,7 @@ public class Teller {
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "role_teller", joinColumns = @JoinColumn(name = "teller_dd"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "role_teller", joinColumns = @JoinColumn(name = "teller_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> tellerRoles = new HashSet<>();
 
 

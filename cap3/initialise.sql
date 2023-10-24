@@ -26,15 +26,7 @@ EXCEPTION
       END IF;
 END;
 /
-BEGIN
-   EXECUTE IMMEDIATE 'DROP TABLE transaction';
-EXCEPTION
-   WHEN OTHERS THEN
-      IF SQLCODE != -942 THEN
-         RAISE;
-      END IF;
-END;
-/
+
 BEGIN
    EXECUTE IMMEDIATE 'DROP TABLE ACCOUNT';
 EXCEPTION
@@ -48,7 +40,6 @@ create table teller(teller_id number(19) primary key, teller_name varchar2(255),
 create table role(role_id number(19) primary key, role_name varchar2(255));
 create table role_teller(role_id number(19), teller_id number(19), PRIMARY KEY ( role_id, teller_id ), CONSTRAINT fk_role foreign key (role_id) references role(role_id) on delete cascade, CONSTRAINT fk_teller foreign key (teller_id) references teller(teller_id) on delete cascade);
 create table Account(account_id number(19) primary key, account_name varchar2(255), email varchar2(255), phone varchar2(255), address varchar2(255), balance float(53), status varchar2(255));
-create table Transaction(trans_id number(19) primary key, trans_date timestamp(6), trans_type varchar2(255), account_id number(19), amount float(53), CONSTRAINT fk_aid FOREIGN KEY (account_id) REFERENCES Account(account_id) on delete cascade);
 
 insert into teller(teller_id, teller_name, teller_pass) values(1, 'john','$2a$12$Evxv9k0w1/eWiUl8g6/k5OrjOPREUyBqYJJ8KqBA1qzgxjhArXtwK');
 insert into teller(teller_id, teller_name, teller_pass) values(2, 'marcus','$2a$12$Evxv9k0w1/eWiUl8g6/k5OrjOPREUyBqYJJ8KqBA1qzgxjhArXtwK');
@@ -61,8 +52,5 @@ insert into account(account_id , account_name , email , phone, address , balance
 insert into account(account_id , account_name , email , phone, address , balance, status) values (2 , 'hello' , 'hello@gmail.com' , '988' , 'kitty', 10000, 'active');
 insert into account(account_id , account_name , email , phone, address , balance, status) values (3 , 'zx' , 'zx@gmail.com' , '7776666' , 'aglio', 666.3, 'inactive');
 
-insert into transaction(trans_id , trans_date , trans_type, account_id, amount) values (1, SYSTIMESTAMP, 'WITHDRAWAL', 1, 3);
-insert into transaction(trans_id , trans_date , trans_type, account_id, amount) values (2, SYSTIMESTAMP, 'DEPOSIT', 1, 3);
-insert into transaction(trans_id , trans_date , trans_type, account_id, amount) values (3, SYSTIMESTAMP, 'WITHDRAWAL', 2, 30);
-insert into transaction(trans_id , trans_date , trans_type, account_id, amount) values (4, SYSTIMESTAMP, 'DEPOSIT', 3, 30);
+
 commit;

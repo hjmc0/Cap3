@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Teller Entry Form</h2>
+			<form th:action="@{/adding}" method="get" id="form1" th:object="${teller}">
+				<table class="table table-striped">
+					<tr>
+						<td>Teller Id:</td>
+						<td><input type="text" th:field="*{tellerId}" readonly></td>
+					</tr>
+					<tr>
+						<td>Teller Name:</td>
+						<td><input type="text" th:field="*{tellerName}"></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="text" th:field="*{tellerPass}"></td>
+					</tr>
+
+					<tr>
+						<td>
+							<div> <th:block th:each="role: ${listRoles}">
+									<input type="checkbox" th:field="*{tellerRoles}" th:text="${role.roleName}"
+										th:value="${role.roleId}" class="m-2" />
+								</th:block>
+							</div>
+						</td>
+					</tr>
+
+				</table>
+			</form>
+			<button type="submit" form="form1" value="Submit">Create Teller</button>
+			<button type="button"
+				class="btn btn-primary" onclick="window.location.href='/'">
+				Home
+			</button>
+			<form action="/logout" method="post">
+				<button type="submit">Logout</button>
+			</form>
+</body>
+</html>

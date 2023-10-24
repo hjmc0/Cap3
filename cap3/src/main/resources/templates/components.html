@@ -212,8 +212,7 @@
               src="https://upload.wikimedia.org/wikipedia/commons/e/ef/UOB_Logo.svg"
               alt="Home"
               style="width: 56px; height: 28px"
-            /></a
-          >
+          /></a>
           <button
             class="navbar-toggler"
             type="button"
@@ -228,16 +227,16 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="/view">Home</a>
+                <a class="nav-link active" aria-current="page" href="/view">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/createteller">Create Teller</a>
+                <a class="nav-link active" href="/createteller">Create Teller</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/createaccount">Create Account</a>
+                <a class="nav-link active" href="/createaccount">Create Account</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
+                <a class="nav-link active" href="/logout">Logout</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
@@ -247,7 +246,11 @@
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-success" type="submit">
+              <button
+                class="btn btn-outline-success"
+                type="submit"
+                style="border: 1px solid white; color: white"
+              >
                 Search
               </button>
             </form>

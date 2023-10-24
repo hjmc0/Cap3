@@ -34,8 +34,8 @@
             <td th:text="${x.getPhone()}"></td>
             <td th:text="${x.getAddress()}"></td>
             <td th:text="${x.getBalance()}"></td>
-            <td style="text-align: center">
-              <a th:href="'/transaction/'+${x.getAccountId()}">Transact</a>
+            <td>
+              <a th:href="'/transact/'+${x.getAccountId()}">Transact</a>
             </td>
           </tr>
         </tbody>

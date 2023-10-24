@@ -30,12 +30,12 @@ public class SecurityConfig {
         http.authorizeHttpRequests(
                 auth -> auth.requestMatchers("/css/**", "/js/**", "/fonts/**", "/images/**", "/scss/**").permitAll()
                         .requestMatchers("/", "/logout", "/login").permitAll()
-                        .requestMatchers("/view", "/edit/*", "/withdraw/*", "/deposit/*", "/transaction/*",
-                                "/createteller", "/createaccount", "/save","/adding")
+                        .requestMatchers("/view", "/edit/*", "/withdraw/*", "/deposit/*", "/transact/*",
+                                "/createteller", "/createaccount", "/savetransact","/adding")
                         .authenticated()
                         .requestMatchers("/**").anonymous())
                 .formLogin(fl -> fl.loginPage("/login").successForwardUrl("/view"))
-                .logout((logout) -> logout.logoutSuccessUrl("/login"))
+                .logout((logout) -> logout.logoutSuccessUrl("/"))
                 .csrf(csrf -> csrf.disable());
         return http.build();
     }

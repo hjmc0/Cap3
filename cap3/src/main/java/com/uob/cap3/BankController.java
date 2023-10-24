@@ -25,7 +25,6 @@ import com.uob.cap3.repo.AccountRepo;
 
 @Controller
 public class BankController {
-    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     AccountRepo ar;
 

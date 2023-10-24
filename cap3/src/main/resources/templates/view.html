@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <div th:replace="~{components :: bootstrap-links}"></div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      td i {
+          font-size: 20px;
+          margin-right: 20px; 
+      }
+  </style>
     <script>
       window.history.pushState("url", "Title", "/view");
     </script>
+
   </head>
 
   <body>
@@ -17,13 +25,13 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Address</th>
-            <th scope="col">Balance</th>
-            <th scope="col">Action</th>
+            <th scope="col" style="width: 80px;">ID</th>
+            <th scope="col" style="width: 250px;">Name</th>
+            <th scope="col" style="width: 300px;">Email</th>
+            <th scope="col" style="width: 200px;">Phone</th>
+            <th scope="col" style="width: 350px;">Address</th>
+            <th scope="col" style="width: 250px;">Balance</th>
+            <th scope="col colspan="4"">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -33,9 +41,13 @@
             <td th:text="${x.getEmail()}"></td>
             <td th:text="${x.getPhone()}"></td>
             <td th:text="${x.getAddress()}"></td>
-            <td th:text="${x.getBalance()}"></td>
+            <td th:text="'S$ '+${x.getBalance()}"></td>
             <td>
-              <a th:href="'/transact/'+${x.getAccountId()}">Transact</a>
+              <a th:href="'/transact/'+${x.getAccountId()}"><i class="fas fa-exchange-alt"></i></a>
+              <a th:href="'/transaction/'+${x.getAccountId()}"><i class="fas fa-history"></i></a>
+              <a th:href="'/edit/'+${x.getAccountId()}"><i class="fas fa-pencil-alt"></i></a>
+              <a th:href="'/delete/'+${x.getAccountId()}"><i class="fas fa-trash-alt"></i></a>
+
             </td>
           </tr>
         </tbody>

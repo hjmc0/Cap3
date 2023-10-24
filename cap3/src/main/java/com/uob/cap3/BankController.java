@@ -1,6 +1,8 @@
 package com.uob.cap3;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ import com.uob.cap3.repo.AccountRepo;
 
 @Controller
 public class BankController {
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     AccountRepo ar;
 

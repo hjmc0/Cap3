@@ -32,7 +32,8 @@ public class SecurityConfig {
                         .requestMatchers("/", "/logout", "/login").permitAll()
                         .requestMatchers("/view", "/edit/*", "/withdraw/*", "/deposit/*", "/transaction/*",
                                 "/createteller", "/createaccount", "/save")
-                        .authenticated())
+                        .authenticated()
+                        .requestMatchers("/**").anonymous())
                 .formLogin(fl -> fl.loginPage("/login").successForwardUrl("/view"))
                 .logout((logout) -> logout.logoutSuccessUrl("/login"))
                 .csrf(csrf -> csrf.disable());

@@ -6,6 +6,9 @@
     <title>Welcome to Cecil Street</title>
     <link th:href="@{/css/login.css}" rel="stylesheet" />
     <div th:replace="~{components :: bootstrap-links}"></div>
+    <script>
+      window.history.pushState("url", "Title", "/login");
+    </script>
   </head>
   <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <div th:replace="~{components :: toggle-color-modes}"></div>

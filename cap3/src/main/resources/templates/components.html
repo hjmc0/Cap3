@@ -1,5 +1,6 @@
 <!-- <div th:replace="~{components :: bootstrap-links}"></div> -->
 <!-- <div th:replace="~{components :: toggle-color-modes}"></div> -->
+<!-- <div th:replace="~{components :: navbar}"></div> -->
 
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
@@ -198,6 +199,61 @@
           </button>
         </li>
       </ul>
+    </div>
+
+    <div th:fragment="navbar">
+      <nav
+        class="navbar navbar-expand-md navbar-dark mb-4"
+        style="background-color: #712cf9"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand"
+            ><img
+              src="https://upload.wikimedia.org/wikipedia/commons/e/ef/UOB_Logo.svg"
+              alt="Home"
+              style="width: 56px; height: 28px"
+            /></a
+          >
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/view">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/createteller">Create Teller</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/createaccount">Create Account</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
     </div>
   </body>
 </html>

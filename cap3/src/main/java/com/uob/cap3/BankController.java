@@ -30,6 +30,7 @@ import com.uob.cap3.repo.AccountRepo;
 
 @Controller
 public class BankController {
+    boolean withdrawExceed = false;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     AccountRepo ar;
@@ -63,6 +64,7 @@ public class BankController {
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         m.addAttribute("accToEdit", accToEdit);
+        m.addAttribute("withdrawExceed", withdrawExceed);
         return "transact";
     }
 
@@ -72,10 +74,10 @@ public class BankController {
         Account acc = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         double old_bal = acc.getBalance();
         if(transType.equalsIgnoreCase("withdraw") && amt>old_bal){
-            //toastify here
-
+            withdrawExceed = true;
             return "redirect:/transact/"+id;
         }
+        withdrawExceed = false;
         acc.setBalance(old_bal + (transType.equalsIgnoreCase("withdraw") ? -amt : amt));
         ar.save(acc);
 

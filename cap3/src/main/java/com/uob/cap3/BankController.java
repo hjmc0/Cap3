@@ -106,7 +106,10 @@ public class BankController {
     }
 
     @RequestMapping("/createaccount")
-    public String createAccount() {
+    public String createAccount(Model model, Account account) {
+        model.addAttribute("account", account);
+        // List<Transaction> transactionsList = (List<Transaction>) tr.findAll();
+        // model.addAttribute("transList", transactionsList);
         return "createaccount";
     }
 
@@ -124,6 +127,12 @@ public class BankController {
             }
         }
         tellerRepo.save(teller);
+        return "view";
+    }
+
+    @GetMapping("/addaccount")
+    public String addAccount(Account account){
+        ar.save(account);
         return "view";
     }
 }

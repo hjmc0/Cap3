@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Teller Entry Form</h2>
+			<form th:action="/addaccount" method="get" id="form2" th:object="${account}">
+				<table class="table table-striped">
+					<tr>
+						<td>Account Id:</td>
+						<td><input type="text" th:field="*{accountId}" readonly></td>
+					</tr>
+					<tr>
+						<td>Name:</td>
+						<td><input type="text" th:field="*{accountName}"></td>
+					</tr>
+					<tr>
+						<td>Account Balance:</td>
+						<td><input type="number" th:field="*{balanace}"></td>
+					</tr>
+					<tr>
+						<td>Address:</td>
+						<td><input type="text" th:field="*{address}"></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><input type="text" th:field="*{email}"></td>
+					</tr>
+					<tr>
+						<td>Phone No.:</td>
+						<td><input type="number" th:field="*{phone}"></td>
+					</tr>
+					<tr>
+						<td>Status:</td>
+						<td><input type="text" th:field="*{Status}"></td>
+					</tr>
+
+				</table>
+                <button type="submit" form="form2" value="Submit">Create Account</button>
+
+			</form>
+
+</body>
+</html>

@@ -18,4 +18,8 @@ public class Role {
     private Long roleId;
 
     private String roleName;
+    @Override
+    public String toString(){
+        return roleName;
+    }
 }

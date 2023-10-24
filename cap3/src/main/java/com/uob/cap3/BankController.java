@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 // import java.util.ArrayList;
 import java.util.List;
 
@@ -63,10 +64,16 @@ public class BankController {
     }
 
     @RequestMapping("/createteller")
-    public String createTeller(Model model, Teller teller) {
+    public String createTeller(Model model, Teller teller, Principal principal) {
         model.addAttribute("teller", teller);
         List<Role> listRoles = (List<Role>) roleRepo.findAll();
-        model.addAttribute("listRoles", listRoles);
+        model.addAttribute("tellerRoles", listRoles);
+
+
+        List<Teller> tellerList = (List<Teller>) tellerRepo.findAll();
+        model.addAttribute("tellerList", tellerList);
+        // model.addAttribute("tellerN", principal.getName());
+        // model.addAttribute("principle", principal);
         return "createteller";
     }
 
@@ -116,6 +123,7 @@ public class BankController {
                 teller.setTellerPass(passwordEncoder.encode(teller.getTellerPass()));
             }
         }
-        return "redirect:/createteller";
+        tellerRepo.save(teller);
+        return "view";
     }
 }

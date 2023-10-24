@@ -21,10 +21,9 @@
 						<td>Password:</td>
 						<td><input type="text" th:field="*{tellerPass}"></td>
 					</tr>
-
 					<tr>
 						<td>
-							<div> <th:block th:each="role: ${listRoles}">
+							<div> <th:block th:each="role: ${tellerRoles}">
 									<input type="checkbox" th:field="*{tellerRoles}" th:text="${role.roleName}"
 										th:value="${role.roleId}" class="m-2" />
 								</th:block>
@@ -33,11 +32,42 @@
 					</tr>
 
 				</table>
+                <button type="submit" form="form1" value="Submit">Create Teller</button>
+
 			</form>
-			<button type="submit" form="form1" value="Submit">Create Teller</button>
+
+            <!-- Table Management of Tellers -->
+            <table>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Teller Id</th>
+                        <th>Teller Name</th>
+                        <th>Teller Role</th>
+                    </tr>
+                </thead>
+    
+                <tbody>
+                    <tr th:each="u:${tellerList}">
+                        <td th:text="${u.tellerId}"></td>
+                        <td th:text="${u.tellerName}"></td>
+                        <td th:text="${u.tellerRoles}"></td>
+    
+                        <!-- <td><a class="edit" th:href="@{'/edit/' +${u.id}}"> <i
+                                    class="fas fa-user-edit"></i> edit
+                            </a> <a style="color: red" th:href="@{'/delete/' + ${u.id}}"><i
+                                    class="fas fa-trash"></i>delete</a></td>
+                    </tr> -->
+                </tbody>
+            </table>
+			
+            <!-- Nav Button HERE -->
 			<button type="button"
 				class="btn btn-primary" onclick="window.location.href='/'">
 				Home
+			</button>
+			<button type="button"
+				class="btn btn-primary" onclick="window.location.href='/view'">
+				Back to View Page
 			</button>
 			<form action="/logout" method="post">
 				<button type="submit">Logout</button>

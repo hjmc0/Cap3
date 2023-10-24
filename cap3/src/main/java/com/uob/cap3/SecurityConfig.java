@@ -30,8 +30,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests(
                 auth -> auth.requestMatchers("/css/**", "/js/**", "/fonts/**", "/images/**", "/scss/**").permitAll()
                         .requestMatchers("/", "/logout", "/login").permitAll()
-                        .requestMatchers("/view", "/edit/*", "/withdraw/*", "/deposit/*", "/transaction/*",
-                                "/createteller", "/createaccount", "/save")
+                        .requestMatchers("/view", "/edit/*", "/withdraw/*", "/deposit/*", "/transact/*",
+                                "/createteller", "/createaccount", "/savetransact")
                         .authenticated()
                         .requestMatchers("/**").anonymous())
                 .formLogin(fl -> fl.loginPage("/login").successForwardUrl("/view"))

@@ -29,8 +29,8 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 auth -> auth.requestMatchers("/css/**", "/js/**", "/fonts/**", "/images/**", "/scss/**").permitAll()
-                        .requestMatchers("/logout", "/login").permitAll()
-                        .requestMatchers("/", "/view", "/edit/*", "/withdraw/*", "/deposit/*", "/transaction/*",
+                        .requestMatchers("/", "/logout", "/login").permitAll()
+                        .requestMatchers("/view", "/edit/*", "/withdraw/*", "/deposit/*", "/transaction/*",
                                 "/createteller", "/createaccount", "/save")
                         .authenticated())
                 .formLogin(fl -> fl.loginPage("/login").successForwardUrl("/view"))

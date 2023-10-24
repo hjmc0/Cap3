@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <div th:replace="~{components :: bootstrap-links}"></div>
+    <script>
+      window.history.pushState("url", "Title", "/transact");
+    </script>
 </head>
 <body>
+    <div th:replace="~{components :: toggle-color-modes}"></div>
+    <div th:replace="~{components :: navbar}"></div>
     <form action="/savetransact" th:object="${accToEdit}">
 
         <div>

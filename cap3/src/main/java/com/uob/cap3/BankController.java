@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.security.Principal;
 import java.sql.Timestamp;
@@ -25,16 +26,21 @@ import com.uob.cap3.repo.AccountRepo;
 import com.uob.cap3.repo.RoleRepo;
 import com.uob.cap3.repo.TellerRepo;
 import com.uob.cap3.repo.TransactionRepo;
+import com.uob.cap3.service.AccountService;
 import com.uob.cap3.entities.Account;
 import com.uob.cap3.repo.AccountRepo;
 
 @Controller
 public class BankController {
     boolean withdrawExceed = false;
+    boolean accountClosed = false;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     AccountRepo ar;
 
+    @Autowired
+    AccountService as;
+    
     @Autowired
     TransactionRepo tr;
 
@@ -55,14 +61,38 @@ public class BankController {
     }
 
     @RequestMapping("/view")
-    public String viewPage(Model m) {
+    public String viewPage(Model m, @RequestParam(value="query", required = false) String query) {
         m.addAttribute("accounts", (List<Account>) ar.findAll());
+        if (query != null && !query.trim().isEmpty()) {
+            m.addAttribute("accounts", (List<Account>) as.searchAccounts(query));
+        }
+        m.addAttribute("accountClosed", accountClosed);
         return "view";
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String edi(Model m, @PathVariable Long id) {
+        Account acc = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
+        m.addAttribute("account", acc);
+        return "edit";
+    }
+
+    @RequestMapping("/saveEdit")
+    public String saveEdit(@ModelAttribute("account") Account account,
+            @RequestParam(name = "status", defaultValue = "inactive") String status) {
+        account.setStatus(status.equalsIgnoreCase("on") ? "active" : "closed");
+        ar.save(account);
+        return "redirect:/view";
     }
 
     @RequestMapping("/transact/{id}")
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
+        if(accToEdit.getStatus().equalsIgnoreCase("closed")){
+            accountClosed = true;
+            return "redirect:/view";
+        }
+        accountClosed = false;
         m.addAttribute("accToEdit", accToEdit);
         m.addAttribute("withdrawExceed", withdrawExceed);
         return "transact";

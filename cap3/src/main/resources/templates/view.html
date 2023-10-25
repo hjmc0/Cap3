@@ -25,6 +25,26 @@
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
+    <div th:if="${accountClosed}">
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        data-bs-delay="5000"
+        style="
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+        "
+      >
+        <div class="toast show" data-bs-toggle="toast" data-bs-dismiss="toast">
+          <div class="toast-header">
+            <strong class="me-auto">Error</strong>
+          </div>
+          <div class="toast-body">Account closed, can't transact!</div>
+        </div>
+      </div>
+    </div>
     <div class="mydivlist"  style="width: 85%; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); margin: 20px auto; flex: 1;">
       <table class="table table-striped">
         <thead>

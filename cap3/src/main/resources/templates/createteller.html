@@ -15,17 +15,17 @@
     <h2>Teller Entry Form</h2>
     <form th:action="@{/adding}" method="get" id="form1" th:object="${teller}">
       <table class="table table-striped">
-        <tr>
-          <td>Teller Id:</td>
-          <td><input type="text" th:field="*{tellerId}" readonly /></td>
+        <tr hidden>
+          <td hidden>Teller Id:</td>
+          <td><input type="text" th:field="*{tellerId}" readonly hidden/></td>
         </tr>
         <tr>
           <td>Teller Name:</td>
-          <td><input type="text" th:field="*{tellerName}" /></td>
+          <td><input type="text" th:field="*{tellerName}" required/></td>
         </tr>
         <tr>
           <td>Password:</td>
-          <td><input type="text" th:field="*{tellerPass}" /></td>
+          <td><input type="text" th:field="*{tellerPass}" required/></td>
         </tr>
         <tr>
           <td>
@@ -62,6 +62,7 @@
             <th scope="col" style="width: 5%;">Teller Id</th>
             <th scope="col" style="width: 5%;">Teller Name</th>
             <th scope="col" style="width: 5%;">Teller Role</th>
+            <th scope="col" style="width: 5%;">Action</th>
           </tr>
         </thead>
 
@@ -70,12 +71,10 @@
             <td th:text="${u.tellerId}"></td>
             <td th:text="${u.tellerName}"></td>
             <td th:text="${u.tellerRoles}"></td>
-
-            <!-- <td><a class="edit" th:href="@{'/edit/' +${u.id}}"> <i
-                                    class="fas fa-user-edit"></i> edit
-                            </a> <a style="color: red" th:href="@{'/delete/' + ${u.id}}"><i
+            
+            <td><a style="color: red" th:href="@{'/delete/' + ${u.tellerId}}"><i
                                     class="fas fa-trash"></i>delete</a></td>
-                    </tr> -->
+                    </tr>
           </tr>
         </tbody>
       </table>

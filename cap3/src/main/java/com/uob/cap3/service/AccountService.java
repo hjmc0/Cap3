@@ -17,16 +17,11 @@ public class AccountService {
 
     public List<Account> searchAccounts(String query) {
         List<Account> accounts = new ArrayList<>();
-        if (query == null || query.trim().isEmpty()) {
-            return accounts;
-        }
-
         accounts = (List<Account>) ar.findAll();
         String lowercaseQuery = query.toLowerCase();
         return accounts.stream().filter(account -> (String.valueOf(account.getAccountId())).contains(lowercaseQuery)
                 || account.getAccountName().toLowerCase().contains(lowercaseQuery)
                 || account.getAddress().toLowerCase().contains(lowercaseQuery)
-                || (String.valueOf(account.getBalance())).contains(lowercaseQuery)
                 || account.getEmail().toLowerCase().contains(lowercaseQuery)
                 || account.getPhone().toLowerCase().contains(lowercaseQuery)
                 || account.getStatus().toLowerCase().contains(lowercaseQuery)).collect(Collectors.toList());

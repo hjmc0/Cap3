@@ -48,9 +48,7 @@
 
                 <input type="checkbox" data-toggle="toggle" th:checked="${account.status.equalsIgnoreCase('active')}" name="status"
                 id="status" data-on="active" data-off="inactive" data-onstyle="success" data-offstyle="danger"/>
-                <!-- <input type="hidden" th:value="${account.status.equalsIgnoreCase('active')?'inactive':'active'}" name="newstatus" id ="newstatus" /> -->
 
-                <!-- th:field="*{status}" th:value ="'active'"  -->
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

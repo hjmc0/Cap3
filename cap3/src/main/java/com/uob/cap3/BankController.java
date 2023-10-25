@@ -32,15 +32,19 @@ import com.uob.cap3.repo.AccountRepo;
 
 @Controller
 public class BankController {
-    boolean withdrawExceed = false;
-    boolean accountClosed = false;
+    boolean withdrawExceed = false, accountClosed = false;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public void resetState(){
+        accountClosed = false;
+        withdrawExceed = false;
+    }
     @Autowired
     AccountRepo ar;
 
     @Autowired
     AccountService as;
-    
+
     @Autowired
     TransactionRepo tr;
 
@@ -62,6 +66,7 @@ public class BankController {
 
     @RequestMapping("/view")
     public String viewPage(Model m, @RequestParam(value="query", required = false) String query) {
+        withdrawExceed = false;
         m.addAttribute("accounts", (List<Account>) ar.findAll());
         if (query != null && !query.trim().isEmpty()) {
             m.addAttribute("accounts", (List<Account>) as.searchAccounts(query));
@@ -71,7 +76,8 @@ public class BankController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String edi(Model m, @PathVariable Long id) {
+    public String edit(Model m, @PathVariable Long id) {
+        accountClosed = false;
         Account acc = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         m.addAttribute("account", acc);
         return "edit";
@@ -80,7 +86,7 @@ public class BankController {
     @RequestMapping("/saveEdit")
     public String saveEdit(@ModelAttribute("account") Account account,
             @RequestParam(name = "status", defaultValue = "inactive") String status) {
-        account.setStatus(status.equalsIgnoreCase("on") ? "active" : "closed");
+        account.setStatus(status.equalsIgnoreCase("on") ? "active" : "inactive");
         ar.save(account);
         return "redirect:/view";
     }
@@ -88,7 +94,7 @@ public class BankController {
     @RequestMapping("/transact/{id}")
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
-        if(accToEdit.getStatus().equalsIgnoreCase("closed")){
+        if(accToEdit.getStatus().equalsIgnoreCase("closed") || accToEdit.getStatus().equalsIgnoreCase("inactive")){
             accountClosed = true;
             return "redirect:/view";
         }
@@ -108,7 +114,7 @@ public class BankController {
             return "redirect:/transact/"+id;
         }
         withdrawExceed = false;
-        acc.setBalance(old_bal + (transType.equalsIgnoreCase("withdraw") ? -amt : amt));
+        acc.setBalance(old_bal + (transType.equalsIgnoreCase("withdraw") ? -Math.abs(amt) : Math.abs(amt)));
         ar.save(acc);
 
         LocalDateTime dateTime = LocalDateTime.now();
@@ -125,12 +131,14 @@ public class BankController {
 
     @RequestMapping("/transaction/{id}")
     public String viewTransactions(Model m, @PathVariable Long id) {
+        resetState();
         m.addAttribute("transactions", tr.findByAccountId(id));
         return "transactions";
     }
 
     @RequestMapping("/createteller")
     public String createTeller(Model model, Teller teller, Principal principal) {
+        resetState();
         model.addAttribute("teller", teller);
         List<Role> listRoles = (List<Role>) roleRepo.findAll();
         model.addAttribute("tellerRoles", listRoles);
@@ -145,6 +153,7 @@ public class BankController {
 
     @RequestMapping("/createaccount")
     public String createAccount(Model model, Account account) {
+        resetState();
         model.addAttribute("account", account);
         List<Account> accountList = (List<Account>) ar.findAll();
         model.addAttribute("accountList", accountList);
@@ -153,6 +162,7 @@ public class BankController {
 
     @GetMapping("/adding")
     public String addTeller(Teller teller){
+        resetState();
         if (teller.getTellerId()==null){
             teller.setTellerPass(passwordEncoder.encode(teller.getTellerPass()));
         } else {
@@ -170,6 +180,7 @@ public class BankController {
 
     @GetMapping("/delete/{id}")
     public String deleteAccount(@PathVariable("id") Long id, Model m) {
+        resetState();
         Account acc = ar.findById(id).get();
         m.addAttribute("acc", acc);
         return "close";
@@ -181,7 +192,6 @@ public class BankController {
             Account acc = ar.findById(id).get();
             acc.setStatus("closed");
             ar.save(acc);
-            System.out.println("here");
             return "redirect:/view";
         } else {
             return "redirect:/view";
@@ -190,6 +200,7 @@ public class BankController {
     
     @GetMapping("/addaccount")
     public String addAccount(Account account){
+        resetState();
         account.setBalance(0.00);
         account.setStatus("active");
         ar.save(account);

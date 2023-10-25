@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.security.Principal;
 import java.sql.Timestamp;
@@ -60,6 +61,19 @@ public class BankController {
         return "view";
     }
 
+    @RequestMapping("/edit/{id}")
+    public String edi(Model m, @PathVariable Long id) {
+        Account acc = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
+        m.addAttribute("account", acc);
+        return "edit";
+    }
+
+    @RequestMapping("/saveEdit")
+    public String saveEdit(@ModelAttribute("account") Account account, @RequestParam(name="status", defaultValue = "inactive") String status) {
+        account.setStatus(status.equalsIgnoreCase("on")?"active":"inactive");
+        ar.save(account);
+        return "redirect:/view";
+    }
     @RequestMapping("/transact/{id}")
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));

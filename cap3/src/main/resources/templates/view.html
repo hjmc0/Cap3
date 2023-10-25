@@ -26,11 +26,12 @@
         <thead>
           <tr>
             <th scope="col" style="width: 80px;">ID</th>
-            <th scope="col" style="width: 250px;">Name</th>
-            <th scope="col" style="width: 300px;">Email</th>
+            <th scope="col" style="width: 200px;">Name</th>
+            <th scope="col" style="width: 250px;">Email</th>
             <th scope="col" style="width: 200px;">Phone</th>
             <th scope="col" style="width: 350px;">Address</th>
             <th scope="col" style="width: 250px;">Balance</th>
+            <th scope="col" style="width: 100px;">Status</th>
             <th scope="col colspan="4"">Action</th>
           </tr>
         </thead>
@@ -42,12 +43,12 @@
             <td th:text="${x.getPhone()}"></td>
             <td th:text="${x.getAddress()}"></td>
             <td th:text="'S$ '+${x.getBalance()}"></td>
+            <td th:text="${x.getStatus()}"></td>
             <td>
               <a th:href="'/transact/'+${x.getAccountId()}"><i class="fas fa-exchange-alt"></i></a>
               <a th:href="'/transaction/'+${x.getAccountId()}"><i class="fas fa-history"></i></a>
               <a th:href="'/edit/'+${x.getAccountId()}"><i class="fas fa-pencil-alt"></i></a>
               <a th:href="'/delete/'+${x.getAccountId()}"><i class="fas fa-trash-alt"></i></a>
-
             </td>
           </tr>
         </tbody>

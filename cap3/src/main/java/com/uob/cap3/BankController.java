@@ -32,11 +32,10 @@ import com.uob.cap3.repo.AccountRepo;
 
 @Controller
 public class BankController {
-    boolean withdrawExceed = false, accountClosed = false;
+    boolean withdrawExceed = false;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public void resetState(){
-        accountClosed = false;
         withdrawExceed = false;
     }
     @Autowired
@@ -71,13 +70,12 @@ public class BankController {
         if (query != null && !query.trim().isEmpty()) {
             m.addAttribute("accounts", (List<Account>) as.searchAccounts(query));
         }
-        m.addAttribute("accountClosed", accountClosed);
+
         return "view";
     }
 
     @RequestMapping("/edit/{id}")
     public String edit(Model m, @PathVariable Long id) {
-        accountClosed = false;
         Account acc = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         m.addAttribute("account", acc);
         return "edit";
@@ -95,10 +93,8 @@ public class BankController {
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         if(accToEdit.getStatus().equalsIgnoreCase("closed") || accToEdit.getStatus().equalsIgnoreCase("inactive")){
-            accountClosed = true;
             return "redirect:/view";
         }
-        accountClosed = false;
         m.addAttribute("accToEdit", accToEdit);
         m.addAttribute("withdrawExceed", withdrawExceed);
         return "transact";
@@ -131,7 +127,6 @@ public class BankController {
 
     @RequestMapping("/transaction/{id}")
     public String viewTransactions(Model m, @PathVariable Long id) {
-        resetState();
         m.addAttribute("transactions", tr.findByAccountId(id));
         return "transactions";
     }

@@ -26,7 +26,6 @@ public class AccountService {
         return accounts.stream().filter(account -> (String.valueOf(account.getAccountId())).contains(lowercaseQuery)
                 || account.getAccountName().toLowerCase().contains(lowercaseQuery)
                 || account.getAddress().toLowerCase().contains(lowercaseQuery)
-                || (String.valueOf(account.getBalance())).contains(lowercaseQuery)
                 || account.getEmail().toLowerCase().contains(lowercaseQuery)
                 || account.getPhone().toLowerCase().contains(lowercaseQuery)
                 || account.getStatus().toLowerCase().contains(lowercaseQuery)).collect(Collectors.toList());

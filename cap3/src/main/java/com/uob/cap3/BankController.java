@@ -164,4 +164,23 @@ public class BankController {
         ar.save(account);
         return "redirect:/createaccount";
     }
+
+    @GetMapping("deleteteller/{id}")
+    public String deleteTeller(@PathVariable("id") Long id, Model m) {
+        Teller teller = tellerRepo.findById(id).get();
+        m.addAttribute("teller",teller);
+        return "deleteteller";
+    }
+
+    @GetMapping("/deleteteller")
+    public String deleteTellerConfirmation(@RequestParam(value = "tchoice") String tchoice, @RequestParam("tellerid") Long id) {
+        if (tchoice.equalsIgnoreCase("yes")) {
+            tellerRepo.deleteById(id);
+            return "redirect:/createteller";
+        } else {
+            return "redirect:/createteller";
+        }
+    }
+
+
 }

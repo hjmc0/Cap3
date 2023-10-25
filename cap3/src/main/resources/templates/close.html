@@ -12,14 +12,13 @@
     <form action="/close" th:object="${acc}">
         <div>
             <label for="aid">Account ID:</label>
-            <input type="number" class="form-control" id="accid" name="accid" th:field="*{id}" readonly>
+            <input type="number" class="form-control" id="accountId" name="accountId" th:field="*{accountId}" readonly>
         </div>
         <div>
-            <p>Do you want to close Account of ID:<span id="accid"></span></p>
+            <p>Do you want to close Account of ID</p>
         </div>
-        <button type="submit" id="dchoice" name="dchoice">Yes</button>
-        <button type="submit" id="dchoice" name="dchoice">No</button>
+        <button type="submit" id="dchoice" name="dchoice" value="yes">Yes</button>
+        <button type="submit" id="dchoice" name="dchoice" value="no">No</button>
     </form>
-    <div th:replace="~{components ::foot}"></div>
 </body>
 </html>

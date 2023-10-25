@@ -135,6 +135,22 @@ public class BankController {
         return "view";
     }
 
-    @GetMapping("/delete")
-    public String deleteA
+    @GetMapping("/delete/{id}")
+    public String deleteAccount(@PathVariable("id") Long id, Model m) {
+        Account acc = ar.findById(id).get();
+        m.addAttribute("acc", acc);
+        return "close";
+    }
+    
+    @GetMapping("/close")
+    public String closeAccount(@RequestParam(value = "dchoice") String dchoice, @RequestParam("id") Long id) {
+        if (dchoice.equalsIgnoreCase("yes")) {
+            Account acc = ar.findById(id).get();
+            acc.setStatus("closed");
+            ar.save(acc);
+            return "redirect:/list";
+        } else {
+            return "redirect:/list";
+        }
+    }
 }

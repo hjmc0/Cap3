@@ -1,22 +1,30 @@
 package com.uob.cap3.service;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.Data;
+import com.uob.cap3.entities.Teller;
+import com.uob.cap3.repo.TellerRepo;
 
 @Service
-@Data
 public class TellerService {
+    @Autowired
+    TellerRepo tr;
 
-    public boolean isValidLogin() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication.isAuthenticated()) {
-             return true;
-        } else {
-            System.out.println("telser");
-            return false;
+    private List<Teller> tellers = new ArrayList<>();
+
+    public List<Teller> searchTellers(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return tellers;
         }
+
+        tellers = (List<Teller>) tr.findAll();
+        String lowercaseQuery = query.toLowerCase();
+        return tellers.stream().filter(teller -> (String.valueOf(teller.getTellerId())).contains(lowercaseQuery)
+                || teller.getTellerName().toLowerCase().contains(lowercaseQuery)).collect(Collectors.toList());
     }
 }

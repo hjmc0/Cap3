@@ -114,7 +114,10 @@ public class BankController {
     }
 
     @RequestMapping("/createaccount")
-    public String createAccount() {
+    public String createAccount(Model model, Account account) {
+        model.addAttribute("account", account);
+        List<Account> accountList = (List<Account>) ar.findAll();
+        model.addAttribute("accountList", accountList);
         return "createaccount";
     }
 
@@ -152,5 +155,13 @@ public class BankController {
         } else {
             return "redirect:/list";
         }
+    }
+    
+    @GetMapping("/addaccount")
+    public String addAccount(Account account){
+        account.setBalance(0.00);
+        account.setStatus("active");
+        ar.save(account);
+        return "redirect:/createaccount";
     }
 }

@@ -7,19 +7,19 @@
 </head>
 <body>
     <h2>Teller Entry Form</h2>
-			<form th:action="/addaccount" method="get" id="form2" th:object="${account}">
+			<form th:action="@{/addaccount}" method="get" id="form2" th:object="${account}">
 				<table class="table table-striped">
 					<tr>
-						<td>Account Id:</td>
-						<td><input type="text" th:field="*{accountId}" readonly></td>
+						<td hidden>Account Id:</td>
+						<td><input type="text" th:field="*{accountId}" hidden readonly></td>
 					</tr>
 					<tr>
 						<td>Name:</td>
 						<td><input type="text" th:field="*{accountName}"></td>
 					</tr>
 					<tr>
-						<td>Account Balance:</td>
-						<td><input type="number" th:field="*{balanace}"></td>
+						<td hidden>Account Balance:</td>
+						<td><input type="number" th:field="*{balance}" value=0 hidden></td>
 					</tr>
 					<tr>
 						<td>Address:</td>
@@ -31,17 +31,71 @@
 					</tr>
 					<tr>
 						<td>Phone No.:</td>
-						<td><input type="number" th:field="*{phone}"></td>
+						<td><input type="tel" th:field="*{phone}"></td>
 					</tr>
 					<tr>
-						<td>Status:</td>
-						<td><input type="text" th:field="*{Status}"></td>
+						<td hidden>Status:</td>
+						<td><input type="text" th:field="*{status}" th:value="active" hidden></td>
 					</tr>
 
 				</table>
                 <button type="submit" form="form2" value="Submit">Create Account</button>
-
 			</form>
+
+			<!-- TABLE FROM HERE -->
+
+			<table>
+				<thead class="thead-dark">
+				  <tr>
+					<th>Account Id</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone No.</th>
+					<th>Address</th>
+					<th>Status</th>
+					<th>Balance</th>
+					<th>Actions</th>
+				  </tr>
+				</thead>
+		  
+				<tbody>
+				  <tr th:each="u:${accountList}">
+					<td th:text="${u.accountId}"></td>
+					<td th:text="${u.accountName}"></td>
+					<td th:text="${u.email}"></td>
+					<td th:text="${u.phone}"></td>
+					<td th:text="${u.address}"></td>
+					<td th:text="${u.status}"></td>
+					<td th:text="${u.balance}"></td>
+		  
+					<td><a class="edit" th:href="@{'/edit/' +${u.accountId}}"> <i
+											  class="fas fa-user-edit"></i> edit
+									  </a> <a style="color: red" th:href="@{'/delete/' + ${u.accountId}}"><i
+											  class="fas fa-trash"></i>delete</a></td>
+							  </tr>
+				  </tr>
+				</tbody>
+			  </table>
+
+
+			    <!-- Nav Button HERE -->
+				<button
+				type="button"
+				class="btn btn-primary"
+				onclick="window.location.href='/'"
+			  >
+				Home
+			  </button>
+			  <button
+				type="button"
+				class="btn btn-primary"
+				onclick="window.location.href='/view'"
+			  >
+				Back to View Page
+			  </button>
+			  <form action="/logout" method="post">
+				<button type="submit">Logout</button>
+			  </form>
 
 </body>
 </html>

@@ -17,10 +17,6 @@ public class TellerService {
 
     public List<Teller> searchTellers(String query) {
         List<Teller> tellers = new ArrayList<>();
-        if (query == null || query.trim().isEmpty()) {
-            return tellers;
-        }
-
         tellers = (List<Teller>) tr.findAll();
         String lowercaseQuery = query.toLowerCase();
         return tellers.stream().filter(teller -> (String.valueOf(teller.getTellerId())).contains(lowercaseQuery)

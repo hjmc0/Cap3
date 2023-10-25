@@ -31,6 +31,7 @@ import com.uob.cap3.service.TellerService;
 @Controller
 public class BankController {
     boolean withdrawExceed = false;
+    boolean accountClosed = false;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     @Autowired
     AccountRepo ar;
@@ -66,6 +67,7 @@ public class BankController {
         if (query != null && !query.trim().isEmpty()) {
             m.addAttribute("accounts", (List<Account>) as.searchAccounts(query));
         }
+        m.addAttribute("accountClosed", accountClosed);
         return "view";
     }
 
@@ -79,7 +81,7 @@ public class BankController {
     @RequestMapping("/saveEdit")
     public String saveEdit(@ModelAttribute("account") Account account,
             @RequestParam(name = "status", defaultValue = "inactive") String status) {
-        account.setStatus(status.equalsIgnoreCase("on") ? "active" : "inactive");
+        account.setStatus(status.equalsIgnoreCase("on") ? "active" : "closed");
         ar.save(account);
         return "redirect:/view";
     }
@@ -87,6 +89,11 @@ public class BankController {
     @RequestMapping("/transact/{id}")
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
+        if(accToEdit.getStatus().equalsIgnoreCase("closed")){
+            accountClosed = true;
+            return "redirect:/view";
+        }
+        accountClosed = false;
         m.addAttribute("accToEdit", accToEdit);
         m.addAttribute("withdrawExceed", withdrawExceed);
         return "transact";

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div th:replace="~{components :: bootstrap-links}"></div>
+</head>
+<body>
+    <div th:replace="~{components :: toggle-color-modes}"></div>
+    <div th:replace="~{components :: navbar}"></div>
+    <form action="/close" th:object="${acc}">
+        <div>
+            <label for="aid">Account ID:</label>
+            <input type="number" class="form-control" id="accid" name="accid" th:field="*{id}" readonly>
+        </div>
+        <div>
+            <p>Do you want to close Account of ID:<span id="accid"></span></p>
+        </div>
+        <button type="submit" id="dchoice" name="dchoice">Yes</button>
+        <button type="submit" id="dchoice" name="dchoice">No</button>
+    </form>
+    <div th:replace="~{components ::foot}"></div>
+</body>
+</html>

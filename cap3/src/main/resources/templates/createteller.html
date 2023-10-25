@@ -18,12 +18,13 @@
     <script>
       window.history.pushState("url", "Title", "/createteller");
     </script>
+    <link th:href="@{/css/error_message.css}" rel="stylesheet" />
   </head>
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
     <h2>Teller Entry Form</h2>
-    <form th:action="@{/adding}" method="get" id="form1" th:object="${teller}">
+    <form th:action="@{/adding}" method="get" id="form1" th:object="${teller}" >
       <table class="table table-striped">
         <tr hidden>
           <td hidden>Teller Id:</td>
@@ -42,18 +43,21 @@
             <div>
               <th:block th:each="role: ${tellerRoles}">
                 <input
-                  type="checkbox"
+                  type="radio"
                   th:field="*{tellerRoles}"
                   th:text="${role.roleName}"
                   th:value="${role.roleId}"
+                  th:checked="${role.roleName.equalsIgnoreCase('teller')}"
                   class="m-2"
                 />
+                
               </th:block>
             </div>
           </td>
         </tr>
       </table>
-      <button type="submit" form="form1" value="Submit">Create Teller</button>
+      <button type="submit" form="form1" value="Submit" >Create Teller</button>
+    
     </form>
 
     <!-- Table Management of Tellers -->

@@ -1,103 +1,144 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<div th:replace="~{components :: bootstrap-links}"></div>
+	<div th:replace="~{components :: datatable-links}"></div>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+	<script>
+		$(document).ready(function () {
+			$("#dataTable").DataTable({
+				searching: false,
+				dom: "rtiplf",
+				info: false,
+			});
+		});
+	</script>
+	<style>
+		tr,
+		td {
+			text-align: center;
+		}
+	</style>
 </head>
+
 <body>
-    <h2>Teller Entry Form</h2>
-			<form th:action="@{/addaccount}" method="get" id="form2" th:object="${account}">
-				<table class="table table-striped">
-					<tr>
-						<td hidden>Account Id:</td>
-						<td><input type="text" th:field="*{accountId}" id="accountId" hidden></td>
-					</tr>
-					<tr>
-						<td>Name:</td>
-						<td><input type="text" id="accountName" th:field="*{accountName}"></td>
-					</tr>
-					<tr>
-						<td hidden>Account Balance:</td>
-						<td><input type="number" id="balance" th:field="*{balance}" value=0 hidden></td>
-					</tr>
-					<tr>
-						<td>Address:</td>
-						<td><input type="text" id="balance" th:field="*{address}"></td>
-					</tr>
-					<tr>
-						<td>Email:</td>
-						<td><input type="text" id="email" th:field="*{email}"></td>
-					</tr>
-					<tr>
-						<td>Phone No.:</td>
-						<td><input type="tel" id="phone" th:field="*{phone}"></td>
-					</tr>
-					<tr>
-						<td hidden>Status:</td>
-						<td><input type="text" id="status" th:field="*{status}" th:value="active" hidden></td>
-					</tr>
+	<div th:replace="~{components :: toggle-color-modes}"></div>
+	<div th:replace="~{components :: navbar}"></div>
+	<section class="vh-100" style="background-color: #eee;">
+		<div class="container h-100">
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col-lg-12 col-xl-12">
+					<div class="card text-black" style="border-radius: 25px;">
+						<h1 class="text-center fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Account</h1>
+						<div class="card-body p-md-5">
+							<div class="row justify-content-center">
+								<div class="col-md-10 col-lg-5 col-xl-5 order-2 order-lg-1">
 
-				</table>
-                <button type="submit" form="form2" value="Submit">Create Account</button>
-			</form>
+									<!-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Account</p> -->
 
-			<!-- TABLE FROM HERE -->
+									<form class="mx-1 mx-md-4" th:action="@{/addaccount}" method="get"
+										th:object="${account}">
 
-			<table>
-				<thead class="thead-dark">
-				  <tr>
-					<th>Account Id</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Phone No.</th>
-					<th>Address</th>
-					<th>Status</th>
-					<th>Balance</th>
-					<th>Actions</th>
-				  </tr>
-				</thead>
-		  
-				<tbody>
-				  <tr th:each="u:${accountList}">
-					<td th:text="${u.accountId}"></td>
-					<td th:text="${u.accountName}"></td>
-					<td th:text="${u.email}"></td>
-					<td th:text="${u.phone}"></td>
-					<td th:text="${u.address}"></td>
-					<td th:text="${u.status}"></td>
-					<td th:text="${u.balance}"></td>
-		  
-					<td><a class="edit" th:href="@{'/edit/' +${u.accountId}}"> <i
-											  class="fas fa-user-edit"></i> edit
-									  </a> <a style="color: red" th:href="@{'/delete/' + ${u.accountId}}"><i
-											  class="fas fa-trash"></i>delete</a></td>
-							  </tr>
-				  </tr>
-				</tbody>
-			  </table>
-			  
+										<input type="text" th:field="*{accountId}" hidden>
+										<input type="number" th:field="*{balance}" value=0 hidden>
+										<input type="text" th:field="*{status}" th:value="active" hidden>
+
+										<div class="d-flex flex-row align-items-center mb-4">
+											<i class="fas fa-user fa-lg me-3 fa-fw"></i>
+											<div class="form-floating">
+												<input type="text" style="width: 350px;" th:field="*{accountName}"
+													id="form3Example1c" class="form-control" placeholder="Name" />
+												<label class="form-label" for="form3Example1c">Name</label>
+											</div>
+										</div>
+
+										<div class="d-flex flex-row align-items-center mb-4">
+											<i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+											<div class="form-floating">
+												<input type="email" style="width: 350px;" th:field="*{email}"
+													id="form3Example3c" class="form-control" placeholder="Email" />
+												<label class="form-label" for="form3Example3c">Email</label>
+											</div>
+										</div>
+
+										<div class="d-flex flex-row align-items-center mb-4">
+											<i class="fas fa-home fa-lg me-3 fa-fw"></i>
+											<div class="form-floating">
+												<input type="text" style="width: 350px;" th:field="*{address}"
+													id="form3Example4c" class="form-control" placeholder="Address" />
+												<label class="form-label" for="form3Example4c">Address</label>
+											</div>
+										</div>
+
+										<div class="d-flex flex-row align-items-center mb-4">
+											<i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+											<div class="form-floating">
+												<input type="text" id="form3Example4cd" th:field="*{phone}"
+													style="width: 350px;" class="form-control"
+													placeholder="Phone Number" />
+												<label class="form-label" for="form3Example4cd">Phone Number</label>
+											</div>
+										</div>
 
 
-			    <!-- Nav Button HERE -->
-				<button
-				type="button"
-				class="btn btn-primary"
-				onclick="window.location.href='/'"
-			  >
-				Home
-			  </button>
-			  <button
-				type="button"
-				class="btn btn-primary"
-				onclick="window.location.href='/view'"
-			  >
-				Back to View Page
-			  </button>
-			  <form action="/logout" method="post">
-				<button type="submit">Logout</button>
-			  </form>
+										<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+											<button type="submit" class="btn btn-primary btn-lg">Create Account</button>
+										</div>
+
+									</form>
+
+								</div>
+								<div class="col-md-10 col-lg-7 col-xl-7 d-flex order-1 order-lg-2">
+									<!-- TABLE FROM HERE -->
+
+									<table class="table table-striped" id="dataTable" data-page-length='10'
+										data-order='[[1, "desc"]]'>
+										<thead>
+											<tr>
+												<th scope="col" style="width: 10%;">ID</th>
+												<th scope="col" style="width: 15%;">Name</th>
+												<th scope="col" style="width: 18%;">Email</th>
+												<th scope="col" style="width: 12%;">Phone</th>
+												<th scope="col" style="width: 25%;">Address</th>
+												<th scope="col" style="width: 10%;">Balance</th>
+												<th scope="col" style="width: 10%;">Status</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr th:each="u:${accountList}">
+												<td th:text="${u.accountId}"></td>
+												<td th:text="${u.accountName}"></td>
+												<td th:text="${u.email}"></td>
+												<td th:text="${u.phone}"></td>
+												<td th:text="${u.address}"></td>
+												<td th:text="${u.status}"></td>
+												<td th:text="${u.balance}"></td>
+
+											</tr>
+											</tr>
+										</tbody>
+									</table>
+
+									<!-- <img src="https://png2.cleanpng.com/sh/083b9273f7e1e80f75375ce5897bf21a/L0KzQYm3UsIzN5ZpfZH0aYP2gLBuTgNqdphmiNH7ZT3rcbr1gf5me5Yye9pyY3vofn75ifNmNahtgeZuLXP4hH7qiPlkc5ZzRdpqaX7kfrb6hb1kcJpog9d3LYLsc7a0VfE5bmo2TKIDNEToRIW1VsU6PWo7UaU6NUG8Q4aBUsczPWU2UZD5bne=/kisspng-singapore-hainanese-chicken-rice-white-cut-chicken-hainanese-chicken-rice-5a8f9140844e44.6595969315193582725419.png"
+										class="img-fluid" alt="Sample image"> -->
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</section>
 
 </body>
+
 </html>

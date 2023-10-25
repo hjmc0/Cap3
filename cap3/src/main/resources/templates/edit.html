@@ -21,7 +21,13 @@
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
-
+    
+<td>
+              <a th:href="'/transact/'+${x.getAccountId()}"><i th:if="${x.getStatus().equalsIgnoreCase('active')}" class="fas fa-exchange-alt"></i></a>
+              <a th:href="'/transaction/'+${x.getAccountId()}"><i class="fas fa-history"></i></a>
+              <a th:href="'/edit/'+${x.getAccountId()}"><i th:if="${!x.getStatus().equalsIgnoreCase('closed')} class="fas fa-pencil-alt"></i></a>
+              <a th:href="'/delete/'+${x.getAccountId()}"><i th:if="${!x.getStatus().equalsIgnoreCase('closed')} class="fas fa-trash-alt"></i></a>
+            </td>
     <div class="mydivform">
       <form action="/saveEdit" th:object="${account}" method="post">
         <div class="form-group">

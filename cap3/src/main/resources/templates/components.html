@@ -241,16 +241,20 @@
                   >Home</a
                 >
               </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="/createteller"
-                  >Create Teller</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="/createaccount"
-                  >Create Account</a
-                >
-              </li>
+
+              
+              <div sec:authorize="hasAnyAuthority('admin','superadmin')">
+                <li class="nav-item">
+                  <a class="nav-link active" href="/createteller">Create Teller</a>
+                </li>
+              </div>
+              
+              <div sec:authorize="hasAnyAuthority('teller', 'superadmin')">
+                <li class="nav-item">
+                  <a class="nav-link active" href="/createaccount">Create Account</a>
+                </li>
+              </div>
+
               <li class="nav-item">
                 <a class="nav-link active" href="/logout">Logout</a>
               </li>

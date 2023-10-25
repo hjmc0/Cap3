@@ -26,6 +26,7 @@ import com.uob.cap3.repo.AccountRepo;
 import com.uob.cap3.repo.RoleRepo;
 import com.uob.cap3.repo.TellerRepo;
 import com.uob.cap3.repo.TransactionRepo;
+import com.uob.cap3.service.AccountService;
 import com.uob.cap3.entities.Account;
 import com.uob.cap3.repo.AccountRepo;
 
@@ -37,6 +38,9 @@ public class BankController {
     @Autowired
     AccountRepo ar;
 
+    @Autowired
+    AccountService as;
+    
     @Autowired
     TransactionRepo tr;
 

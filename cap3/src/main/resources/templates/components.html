@@ -1,4 +1,5 @@
 <!-- <div th:replace="~{components :: bootstrap-links}"></div> -->
+<!-- <div th:replace="~{components :: datatable-links}"></div> -->
 <!-- <div th:replace="~{components :: toggle-color-modes}"></div> -->
 <!-- <div th:replace="~{components :: navbar}"></div> -->
 
@@ -23,6 +24,15 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"
       ></script>
+    </div>
+
+    <div th:fragment="datatable-links">
+      <link
+        rel="stylesheet"
+        href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+      />
+      <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+      <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     </div>
 
     <div
@@ -227,13 +237,19 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/view">Home</a>
+                <a class="nav-link active" aria-current="page" href="/view"
+                  >Home</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/createteller">Create Teller</a>
+                <a class="nav-link active" href="/createteller"
+                  >Create Teller</a
+                >
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/createaccount">Create Account</a>
+                <a class="nav-link active" href="/createaccount"
+                  >Create Account</a
+                >
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="/logout">Logout</a>

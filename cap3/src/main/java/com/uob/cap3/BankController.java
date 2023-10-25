@@ -105,6 +105,7 @@ public class BankController {
     @RequestMapping("/savetransact")
     public String transactionPage(@RequestParam(value = "id") long id,
             @RequestParam(value = "transType") String transType, @RequestParam(value = "amt") double amt) {
+        amt = Math.abs(amt);
         Account acc = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         double old_bal = acc.getBalance();
         if (transType.equalsIgnoreCase("withdraw") && amt > old_bal) {
@@ -112,7 +113,7 @@ public class BankController {
             return "redirect:/transact/" + id;
         }
         withdrawExceed = false;
-        acc.setBalance(old_bal + (transType.equalsIgnoreCase("withdraw") ? -Math.abs(amt) : Math.abs(amt)));
+        acc.setBalance(old_bal + (transType.equalsIgnoreCase("withdraw") ? -amt : amt));
         ar.save(acc);
 
         LocalDateTime dateTime = LocalDateTime.now();

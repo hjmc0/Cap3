@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <div th:replace="~{components :: bootstrap-links}"></div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        tr, td{
+            text-align: center;
+        }
+    </style>
+    <script>
+      window.history.pushState("url", "Title", "/transaction");
+    </script>
+
+  </head>
+
+  <body>
+    <div th:replace="~{components :: toggle-color-modes}"></div>
+    <div th:replace="~{components :: navbar}"></div>
+    <div class="mydivlist"  style="width: 60%; box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); margin: 20px auto; flex: 1;">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 20%;">Transaction ID</th>
+            <th scope="col" style="width: 30%;">Timestamp</th>
+            <th scope="col" style="width: 25%;">Transaction Type</th>
+            <th scope="col" style="width: 25%;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="x:${transactions}">
+            <td th:text="${x.getTransId()}"></td>
+            <td th:text="${x.getTransDate()}"></td>
+            <td th:text="${x.getTransType()}"></td>
+            <td th:text="'S$ '+${x.getAmount()}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    
+  </body>
+</html>

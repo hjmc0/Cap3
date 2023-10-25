@@ -33,7 +33,7 @@ public class BankController {
     boolean withdrawExceed = false;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void resetState(){
+    public void resetState() {
         withdrawExceed = false;
     }
 
@@ -94,7 +94,7 @@ public class BankController {
     @RequestMapping("/transact/{id}")
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
-        if(accToEdit.getStatus().equalsIgnoreCase("closed") || accToEdit.getStatus().equalsIgnoreCase("inactive")){
+        if (accToEdit.getStatus().equalsIgnoreCase("closed") || accToEdit.getStatus().equalsIgnoreCase("inactive")) {
             return "redirect:/view";
         }
         m.addAttribute("accToEdit", accToEdit);
@@ -151,11 +151,15 @@ public class BankController {
     }
 
     @RequestMapping("/createaccount")
-    public String createAccount(Model model, Account account) {
+    public String createAccount(Model model, Account account,
+            @RequestParam(value = "query", required = false) String query) {
         resetState();
         model.addAttribute("account", account);
         List<Account> accountList = (List<Account>) ar.findAll();
         model.addAttribute("accountList", accountList);
+        if (query != null && !query.trim().isEmpty()) {
+            model.addAttribute("accountList", (List<Account>) as.searchAccounts(query));
+        }
         return "createaccount";
     }
 
@@ -208,12 +212,13 @@ public class BankController {
     @GetMapping("/deleteteller/{id}")
     public String deleteTeller(@PathVariable("id") Long id, Model m) {
         Teller teller = tellerRepo.findById(id).get();
-        m.addAttribute("teller",teller);
+        m.addAttribute("teller", teller);
         return "deleteteller";
     }
 
     @GetMapping("/deleteteller")
-    public String deleteTellerConfirmation(@RequestParam(value = "tchoice") String tchoice, @RequestParam("tellerId") Long id) {
+    public String deleteTellerConfirmation(@RequestParam(value = "tchoice") String tchoice,
+            @RequestParam("tellerId") Long id) {
         if (tchoice.equalsIgnoreCase("yes")) {
             tellerRepo.deleteById(id);
             return "redirect:/createteller";
@@ -221,6 +226,5 @@ public class BankController {
             return "redirect:/createteller";
         }
     }
-
 
 }

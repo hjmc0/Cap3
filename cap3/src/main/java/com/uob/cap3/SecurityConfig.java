@@ -31,7 +31,7 @@ public class SecurityConfig {
                 auth -> auth.requestMatchers("/css/**", "/js/**", "/fonts/**", "/images/**", "/scss/**").permitAll()
                         .requestMatchers("/", "/logout", "/login").permitAll()
                         .requestMatchers("/view", "/edit/*","/saveEdit", "/withdraw/*", "/deposit/*", "/transact/*","/transaction/*",
-                                "/createteller", "/createaccount", "/savetransact","/adding","/addaccount", "/delete/*", "/close")
+                                "/createteller", "/createaccount", "/savetransact","/adding","/addaccount", "/delete/*", "/close", "/deleteteller/*", "/deleteteller")
                         .authenticated()
                         .requestMatchers("/**").anonymous())
                 .formLogin(fl -> fl.loginPage("/login").successForwardUrl("/view"))

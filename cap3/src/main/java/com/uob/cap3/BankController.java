@@ -204,7 +204,7 @@ public class BankController {
         return "redirect:/createaccount";
     }
 
-    @GetMapping("deleteteller/{id}")
+    @GetMapping("/deleteteller/{id}")
     public String deleteTeller(@PathVariable("id") Long id, Model m) {
         Teller teller = tellerRepo.findById(id).get();
         m.addAttribute("teller",teller);
@@ -212,7 +212,7 @@ public class BankController {
     }
 
     @GetMapping("/deleteteller")
-    public String deleteTellerConfirmation(@RequestParam(value = "tchoice") String tchoice, @RequestParam("tellerid") Long id) {
+    public String deleteTellerConfirmation(@RequestParam(value = "tchoice") String tchoice, @RequestParam("tellerId") Long id) {
         if (tchoice.equalsIgnoreCase("yes")) {
             tellerRepo.deleteById(id);
             return "redirect:/createteller";

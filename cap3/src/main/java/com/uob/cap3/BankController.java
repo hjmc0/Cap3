@@ -64,7 +64,7 @@ public class BankController {
     public String viewPage(Model m, @RequestParam(value = "query", required = false) String query) {
         m.addAttribute("accounts", (List<Account>) ar.findAll());
         if (query != null && !query.trim().isEmpty()) {
-            m.addAttribute("accounts", (List<Account>) as.searchAccounts(query)); // Display filtered accounts
+            m.addAttribute("accounts", (List<Account>) as.searchAccounts(query));
         }
         return "view";
     }
@@ -77,11 +77,13 @@ public class BankController {
     }
 
     @RequestMapping("/saveEdit")
-    public String saveEdit(@ModelAttribute("account") Account account, @RequestParam(name="status", defaultValue = "inactive") String status) {
-        account.setStatus(status.equalsIgnoreCase("on")?"active":"inactive");
+    public String saveEdit(@ModelAttribute("account") Account account,
+            @RequestParam(name = "status", defaultValue = "inactive") String status) {
+        account.setStatus(status.equalsIgnoreCase("on") ? "active" : "inactive");
         ar.save(account);
         return "redirect:/view";
     }
+
     @RequestMapping("/transact/{id}")
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
@@ -126,7 +128,7 @@ public class BankController {
         model.addAttribute("tellerList", tellerList);
 
         if (query != null && !query.trim().isEmpty()) {
-            model.addAttribute("tellerList", (List<Teller>) ts.searchTellers(query)); // Display filtered accounts
+            model.addAttribute("tellerList", (List<Teller>) ts.searchTellers(query));
         }
         // model.addAttribute("tellerN", principal.getName());
         // model.addAttribute("principle", principal);

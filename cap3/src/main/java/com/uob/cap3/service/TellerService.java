@@ -15,9 +15,8 @@ public class TellerService {
     @Autowired
     TellerRepo tr;
 
-    private List<Teller> tellers = new ArrayList<>();
-
     public List<Teller> searchTellers(String query) {
+        List<Teller> tellers = new ArrayList<>();
         if (query == null || query.trim().isEmpty()) {
             return tellers;
         }

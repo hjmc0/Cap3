@@ -15,9 +15,8 @@ public class AccountService {
     @Autowired
     AccountRepo ar;
 
-    private List<Account> accounts = new ArrayList<>();
-
     public List<Account> searchAccounts(String query) {
+        List<Account> accounts = new ArrayList<>();
         if (query == null || query.trim().isEmpty()) {
             return accounts;
         }

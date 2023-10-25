@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-// import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +26,6 @@ import com.uob.cap3.repo.RoleRepo;
 import com.uob.cap3.repo.TellerRepo;
 import com.uob.cap3.repo.TransactionRepo;
 import com.uob.cap3.service.AccountService;
-import com.uob.cap3.entities.Account;
-import com.uob.cap3.repo.AccountRepo;
 
 @Controller
 public class BankController {
@@ -165,7 +162,7 @@ public class BankController {
             }
         }
         tellerRepo.save(teller);
-        return "view";
+        return "redirect:/createteller";
     }
 
     @GetMapping("/delete/{id}")

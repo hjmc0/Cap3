@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http:www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div th:replace="~{components :: bootstrap-links}"></div>
+</head>
+<body>
+    <div th:replace="~{components :: toggle-color-modes}"></div>
+    <div th:replace="~{components :: navbar}"></div>
+    <form action="/deleteteller" th:object="${teller}">
+        <div>
+            <label for="tellerid">Teller ID:</label>
+            <input type="number" class="form-control" id="tellerid" name="tellerid" th:field="*{id}" readonly>
+        </div>
+        <div>
+            <p>Do you want to delete Teller of ID:<span id="tellerid"></span></p>
+        </div>
+        <button type="submit" id="tchoice" name="tchoice">Yes</button>
+        <button type="submit" id="tchoice" name="tchoice">No</button>
+    </form>
+    <div th:replace="~{components ::foot}"></div>
+</body>
+</html>

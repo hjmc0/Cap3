@@ -26,21 +26,25 @@ import com.uob.cap3.repo.RoleRepo;
 import com.uob.cap3.repo.TellerRepo;
 import com.uob.cap3.repo.TransactionRepo;
 import com.uob.cap3.service.AccountService;
+import com.uob.cap3.service.TellerService;
 
 @Controller
 public class BankController {
-    boolean withdrawExceed = false, accountClosed = false;
+    boolean withdrawExceed = false;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public void resetState(){
-        accountClosed = false;
         withdrawExceed = false;
     }
+
     @Autowired
     AccountRepo ar;
 
     @Autowired
     AccountService as;
+
+    @Autowired
+    TellerService ts;
 
     @Autowired
     TransactionRepo tr;
@@ -57,24 +61,23 @@ public class BankController {
     }
 
     @RequestMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         return "login";
     }
 
     @RequestMapping("/view")
-    public String viewPage(Model m, @RequestParam(value="query", required = false) String query) {
+    public String viewPage(Model m, @RequestParam(value = "query", required = false) String query) {
         withdrawExceed = false;
         m.addAttribute("accounts", (List<Account>) ar.findAll());
         if (query != null && !query.trim().isEmpty()) {
             m.addAttribute("accounts", (List<Account>) as.searchAccounts(query));
         }
-        m.addAttribute("accountClosed", accountClosed);
+
         return "view";
     }
 
     @RequestMapping("/edit/{id}")
     public String edit(Model m, @PathVariable Long id) {
-        accountClosed = false;
         Account acc = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         m.addAttribute("account", acc);
         return "edit";
@@ -92,10 +95,8 @@ public class BankController {
     public String transact(Model m, @PathVariable Long id) {
         Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         if(accToEdit.getStatus().equalsIgnoreCase("closed") || accToEdit.getStatus().equalsIgnoreCase("inactive")){
-            accountClosed = true;
             return "redirect:/view";
         }
-        accountClosed = false;
         m.addAttribute("accToEdit", accToEdit);
         m.addAttribute("withdrawExceed", withdrawExceed);
         return "transact";
@@ -106,9 +107,9 @@ public class BankController {
             @RequestParam(value = "transType") String transType, @RequestParam(value = "amt") double amt) {
         Account acc = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
         double old_bal = acc.getBalance();
-        if(transType.equalsIgnoreCase("withdraw") && amt>old_bal){
+        if (transType.equalsIgnoreCase("withdraw") && amt > old_bal) {
             withdrawExceed = true;
-            return "redirect:/transact/"+id;
+            return "redirect:/transact/" + id;
         }
         withdrawExceed = false;
         acc.setBalance(old_bal + (transType.equalsIgnoreCase("withdraw") ? -Math.abs(amt) : Math.abs(amt)));
@@ -128,23 +129,23 @@ public class BankController {
 
     @RequestMapping("/transaction/{id}")
     public String viewTransactions(Model m, @PathVariable Long id) {
-        resetState();
         m.addAttribute("transactions", tr.findByAccountId(id));
         return "transactions";
     }
 
     @RequestMapping("/createteller")
-    public String createTeller(Model model, Teller teller, Principal principal) {
+    public String createTeller(Model m, Teller teller, Principal principal,
+            @RequestParam(value = "query", required = false) String query) {
         resetState();
-        model.addAttribute("teller", teller);
+        m.addAttribute("teller", teller);
         List<Role> listRoles = (List<Role>) roleRepo.findAll();
-        model.addAttribute("tellerRoles", listRoles);
-
+        m.addAttribute("tellerRoles", listRoles);
 
         List<Teller> tellerList = (List<Teller>) tellerRepo.findAll();
-        model.addAttribute("tellerList", tellerList);
-        // model.addAttribute("tellerN", principal.getName());
-        // model.addAttribute("principle", principal);
+        m.addAttribute("tellerList", tellerList);
+        if (query != null && !query.trim().isEmpty()) {
+            m.addAttribute("tellerList", (List<Teller>) ts.searchTellers(query));
+        }
         return "createteller";
     }
 
@@ -158,16 +159,15 @@ public class BankController {
     }
 
     @GetMapping("/adding")
-    public String addTeller(Teller teller){
+    public String addTeller(Teller teller) {
         resetState();
-        if (teller.getTellerId()==null){
+        if (teller.getTellerId() == null) {
             teller.setTellerPass(passwordEncoder.encode(teller.getTellerPass()));
         } else {
             Teller teller2 = tellerRepo.findById(teller.getTellerId()).orElseThrow();
-            if(teller.getTellerPass().equals(teller2.getTellerPass())){
+            if (teller.getTellerPass().equals(teller2.getTellerPass())) {
                 teller.setTellerPass(teller2.getTellerPass());
-            }
-            else {
+            } else {
                 teller.setTellerPass(passwordEncoder.encode(teller.getTellerPass()));
             }
         }
@@ -182,7 +182,7 @@ public class BankController {
         m.addAttribute("acc", acc);
         return "close";
     }
-    
+
     @GetMapping("/close")
     public String closeAccount(@RequestParam(value = "dchoice") String dchoice, @RequestParam("accountId") Long id) {
         if (dchoice.equalsIgnoreCase("yes")) {
@@ -194,13 +194,32 @@ public class BankController {
             return "redirect:/view";
         }
     }
-    
+
     @GetMapping("/addaccount")
-    public String addAccount(Account account){
+    public String addAccount(Account account) {
         resetState();
         account.setBalance(0.00);
         account.setStatus("active");
         ar.save(account);
         return "redirect:/createaccount";
     }
+
+    @GetMapping("deleteteller/{id}")
+    public String deleteTeller(@PathVariable("id") Long id, Model m) {
+        Teller teller = tellerRepo.findById(id).get();
+        m.addAttribute("teller",teller);
+        return "deleteteller";
+    }
+
+    @GetMapping("/deleteteller")
+    public String deleteTellerConfirmation(@RequestParam(value = "tchoice") String tchoice, @RequestParam("tellerid") Long id) {
+        if (tchoice.equalsIgnoreCase("yes")) {
+            tellerRepo.deleteById(id);
+            return "redirect:/createteller";
+        } else {
+            return "redirect:/createteller";
+        }
+    }
+
+
 }

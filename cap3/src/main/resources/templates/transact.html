@@ -9,7 +9,7 @@
 <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
-    <div th:if="${withdrawExceed}">
+    <!-- <div th:if="${withdrawExceed}">
         <div
           aria-live="polite"
           aria-atomic="true"
@@ -28,7 +28,7 @@
             <div class="toast-body">Too much to withdraw! Please try again.</div>
           </div>
         </div>
-      </div>
+      </div> -->
 
     <form action="/savetransact" th:object="${accToEdit}">
 

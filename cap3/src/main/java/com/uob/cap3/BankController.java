@@ -117,6 +117,12 @@ public class BankController {
         return "redirect:/view";
     }
 
+    @RequestMapping("/transaction/{id}")
+    public String viewTransactions(Model m, @PathVariable Long id) {
+        m.addAttribute("transactions", tr.findByAccountId(id));
+        return "transactions";
+    }
+
     @RequestMapping("/createteller")
     public String createTeller(Model model, Teller teller, Principal principal,
             @RequestParam(value = "query", required = false) String query) {

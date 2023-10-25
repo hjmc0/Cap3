@@ -146,14 +146,15 @@ public class BankController {
     }
     
     @GetMapping("/close")
-    public String closeAccount(@RequestParam(value = "dchoice") String dchoice, @RequestParam("id") Long id) {
+    public String closeAccount(@RequestParam(value = "dchoice") String dchoice, @RequestParam("accountId") Long id) {
         if (dchoice.equalsIgnoreCase("yes")) {
             Account acc = ar.findById(id).get();
             acc.setStatus("closed");
             ar.save(acc);
-            return "redirect:/list";
+            System.out.println("here");
+            return "redirect:/view";
         } else {
-            return "redirect:/list";
+            return "redirect:/view";
         }
     }
     

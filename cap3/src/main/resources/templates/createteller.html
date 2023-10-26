@@ -12,7 +12,7 @@
           searching: false,
           dom: "rtiplf",
           info: false,
-          columnDefs: [{ orderable: false, targets: 3 }]
+          columnDefs: [{ orderable: false, targets: 3 }],
         });
       });
     </script>
@@ -25,40 +25,36 @@
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
     <h2>Teller Entry Form</h2>
-    <form th:action="@{/adding}" method="get" id="form1" th:object="${teller}" >
+    <form th:action="@{/adding}" method="get" id="form1" th:object="${teller}">
       <table class="table table-striped">
         <tr hidden>
           <td hidden>Teller Id:</td>
-          <td><input type="text" th:field="*{tellerId}" readonly hidden/></td>
+          <td><input type="text" th:field="*{tellerId}" readonly hidden /></td>
         </tr>
         <tr>
           <td>Teller Name:</td>
-          <td><input type="text" th:field="*{tellerName}" required/></td>
+          <td><input type="text" th:field="*{tellerName}" required /></td>
         </tr>
         <tr>
           <td>Password:</td>
-          <td><input type="text" th:field="*{tellerPass}" required/></td>
+          <td><input type="text" th:field="*{tellerPass}" required /></td>
         </tr>
         <tr>
           <td>
             <div>
               <th:block th:each="role: ${tellerRoles}">
                 <input
-                  type="radio"
-                  th:field="*{tellerRoles}"
+                  class="form-check-input"
+                  type="checkbox"
                   th:text="${role.roleName}"
-                  th:value="${role.roleId}"
                   th:checked="${role.roleName.equalsIgnoreCase('teller')}"
-                  class="m-2"
                 />
-                
               </th:block>
             </div>
           </td>
         </tr>
       </table>
-      <button type="submit" form="form1" value="Submit" >Create Teller</button>
-    
+      <button type="submit" form="form1" value="Submit">Create Teller</button>
     </form>
 
     <!-- Table Management of Tellers -->
@@ -71,13 +67,18 @@
         flex: 1;
       "
     >
-      <table class="table table-striped" id="dataTable" data-page-length='10' data-order='[[0, "asc"]]'>
+      <table
+        class="table table-striped"
+        id="dataTable"
+        data-page-length="10"
+        data-order='[[0, "asc"]]'
+      >
         <thead class="thead-dark">
           <tr>
-            <th scope="col" style="width: 5%;">Teller Id</th>
-            <th scope="col" style="width: 5%;">Teller Name</th>
-            <th scope="col" style="width: 5%;">Teller Role</th>
-            <th scope="col" style="width: 5%;">Action</th>
+            <th scope="col" style="width: 5%">Teller Id</th>
+            <th scope="col" style="width: 5%">Teller Name</th>
+            <th scope="col" style="width: 5%">Teller Role</th>
+            <th scope="col" style="width: 5%">Action</th>
           </tr>
         </thead>
 
@@ -86,10 +87,14 @@
             <td th:text="${u.tellerId}"></td>
             <td th:text="${u.tellerName}"></td>
             <td th:text="${u.tellerRoles}"></td>
-            
-            <td><a style="color: red" th:href="@{'/deleteteller/' + ${u.tellerId}}"><i
-                                    class="fas fa-trash"></i>delete</a></td>
-                    </tr>
+
+            <td>
+              <a
+                style="color: red"
+                th:href="@{'/deleteteller/' + ${u.tellerId}}"
+                ><i class="fas fa-trash"></i>delete</a
+              >
+            </td>
           </tr>
         </tbody>
       </table>

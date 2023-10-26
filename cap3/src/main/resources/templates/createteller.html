@@ -16,6 +16,7 @@
         });
       });
     </script>
+
     <script>
       window.history.pushState("url", "Title", "/createteller");
     </script>
@@ -39,19 +40,12 @@
           <td>Password:</td>
           <td><input type="text" th:field="*{tellerPass}" required/></td>
         </tr>
+  
         <tr>
           <td>
-            <div>
-              <th:block th:each="role: ${tellerRoles}">
-                <input
-                  type="radio"
-                  th:field="*{tellerRoles}"
-                  th:text="${role.roleName}"
-                  th:value="${role.roleId}"
-                  th:checked="${role.roleName.equalsIgnoreCase('teller')}"
-                  class="m-2"
-                />
-                
+            <div> <th:block th:each="role: ${tellerRoles}">
+                <input type="radio" th:field="*{tellerRoles}" th:text="${role.roleName}"
+                  th:value="${role.roleId}" class="m-2" required />
               </th:block>
             </div>
           </td>

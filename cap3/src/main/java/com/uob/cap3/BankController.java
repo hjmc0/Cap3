@@ -93,7 +93,11 @@ public class BankController {
 
     @RequestMapping("/transact/{id}")
     public String transact(Model m, @PathVariable Long id) {
-        Account accToEdit = ar.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid Account"));
+        Account accToEdit = ar.findById(id).get();
+        String accName = accToEdit.getAccountName();
+        double accBal = accToEdit.getBalance();
+        m.addAttribute("accName", accName);
+        m.addAttribute("accBal", accBal);
         if (accToEdit.getStatus().equalsIgnoreCase("closed") || accToEdit.getStatus().equalsIgnoreCase("inactive")) {
             return "redirect:/view";
         }

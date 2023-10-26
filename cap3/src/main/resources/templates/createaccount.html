@@ -52,14 +52,14 @@
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-12">
-            <div class="card text-black" style="border-radius: 25px">
-              <h1 class="text-center fw-bold mb-5 mx-1 mx-md-4 mt-4">
+            <div class="card text-black" style="border-radius: 25px; background-color: white;">
+              <!-- <h1 class="text-center fw-bold mb-5 mx-1 mx-md-4 mt-4">
                 Create Account
-              </h1>
+              </h1> -->
               <div class="card-body p-md-5">
                 <div class="row justify-content-center">
                   <div class="col-md-6 col-lg-4 col-xl-4 order-2 order-lg-1">
-                    <!-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Account</p> -->
+                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Account</p>
 
                     <form
                       class="mx-1 mx-md-2"
@@ -86,11 +86,12 @@
                         <div class="form-floating">
                           <input
                             type="text"
-                            style="width: 350px"
+                            style="width: 350px; background-color: white;"
                             th:field="*{accountName}"
                             id="form3Example1c"
                             class="form-control"
                             placeholder="Name"
+							required
                           />
                           <label class="form-label" for="form3Example1c"
                             >Name</label
@@ -103,11 +104,12 @@
                         <div class="form-floating">
                           <input
                             type="email"
-                            style="width: 350px"
+                            style="background-color: white; width: 350px"
                             th:field="*{email}"
                             id="form3Example3c"
                             class="form-control"
                             placeholder="Email"
+							required
                           />
                           <label class="form-label" for="form3Example3c"
                             >Email</label
@@ -120,11 +122,12 @@
                         <div class="form-floating">
                           <input
                             type="text"
-                            style="width: 350px"
+                            style="background-color: white; width: 350px"
                             th:field="*{address}"
                             id="form3Example4c"
                             class="form-control"
                             placeholder="Address"
+							required
                           />
                           <label class="form-label" for="form3Example4c"
                             >Address</label
@@ -136,12 +139,13 @@
                         <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                         <div class="form-floating">
                           <input
-                            type="text"
+                            type="tel"
                             id="form3Example4cd"
                             th:field="*{phone}"
-                            style="width: 350px"
+                            style="background-color: white; width: 350px"
                             class="form-control"
                             placeholder="Phone Number"
+							required
                           />
                           <label class="form-label" for="form3Example4cd"
                             >Phone Number</label
@@ -153,14 +157,14 @@
                         class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                       >
                         <button type="submit" class="btn btn-primary btn-lg">
-                          Create Account
+                          Create
                         </button>
                       </div>
                     </form>
                   </div>
                   <div
                     class="col-md-14 col-lg-8 col-xl-8 d-flex order-1 order-lg-2"
-                    style="overflow-x: auto"
+                    style="overflow-x: auto; padding-top:100px; padding-left: 40px;" 
                   >
                     <!-- TABLE FROM HERE -->
 

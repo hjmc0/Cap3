@@ -42,7 +42,7 @@
   <section class="vh-100" style="background-color: #eee;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="card text-black mx-auto" style="border-radius: 25px; max-width: 70%; max-height: 95%;">
+        <div class="card text-black mx-auto" style="background-color: white; border-radius: 25px; max-width: 70%; max-height: 95%;">
           <h1 class="text-center fw-bold mb-5 mx-1 mx-md-4 mt-4">Edit Account</h1>
           <div class="card-body p-md-2">
             <div class="row justify-content-center">
@@ -52,7 +52,7 @@
                 <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
                   <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
-                    <input type="number" style="width: 400px;" readonly th:field="*{accountId}" id="id" name="id"
+                    <input type="number" style="background-color: white; width: 400px;" readonly th:field="*{accountId}" id="id" name="id"
                       class="form-control" placeholder="ID" />
                     <label class="form-label" for="id">ID</label>
                   </div>
@@ -60,7 +60,7 @@
                 <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
                   <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
-                    <input type="text" style="width: 400px;" th:field="*{accountName}" id="name" name="name"
+                    <input type="text" style="background-color: white; width: 400px;" th:field="*{accountName}" id="name" name="name"
                       class="form-control" placeholder="Name" />
                     <label class="form-label" for="name">Name</label>
                   </div>
@@ -69,7 +69,7 @@
                 <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
                   <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
-                    <input type="email" style="width: 400px;" th:field="*{email}" id="email" name="email"
+                    <input type="email" style="background-color: white; width: 400px;" th:field="*{email}" id="email" name="email"
                       class="form-control" placeholder="Email" />
                     <label class="form-label" for="email">Email</label>
                   </div>
@@ -78,7 +78,7 @@
                 <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
                   <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
-                    <input type="tel" id="phone" name="phone" th:field="*{phone}" style="width: 400px;"
+                    <input type="tel" id="phone" name="phone" th:field="*{phone}" style="background-color: white; width: 400px;"
                       class="form-control" placeholder="Phone Number" />
                     <label class="form-label" for="phone">Phone Number</label>
                   </div>
@@ -86,7 +86,7 @@
                 <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
                   <i class="fas fa-home fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
-                    <input type="text" style="width: 400px;" th:field="*{address}" id="address" name="address"
+                    <input type="text" style="background-color: white; width: 400px;" th:field="*{address}" id="address" name="address"
                       class="form-control" placeholder="Address" />
                     <label class="form-label" for="address">Address</label>
                   </div>
@@ -94,7 +94,7 @@
                 <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
                   <i class="fas fa-money-bill fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
-                    <input type="number" style="width: 400px;" th:field="*{balance}" id="bal" name="bal" step="0.01"
+                    <input type="number" style="background-color: white; width: 400px;" th:field="*{balance}" id="bal" name="bal" step="0.01"
                       class="form-control" placeholder="Address" />
                     <label class="form-label" for="bal">Balance</label>
                   </div>

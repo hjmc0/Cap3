@@ -37,7 +37,7 @@
             <input type="number" class="form-control" id="aid" name="aid" th:field="*{accountId}" readonly>
             <input type="hidden" id="id" name="id" th:value="${accToEdit.accountId}">
             <label for="accName">Customer Name:</label>
-            <input type="number" class="form-control" id="accName" name="accName" th:field="*{accountName}" readonly>
+            <input type="text" class="form-control" id="accName" name="accName" th:field="*{accountName}" readonly>
             <label for="accBal">Account Balance:</label>
             <input type="number" class="form-control" id="accBal" name="accBal" th:field="*{balance}" readonly>
         </div>

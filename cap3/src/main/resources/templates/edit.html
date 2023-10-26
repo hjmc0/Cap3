@@ -1,109 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <div th:replace="~{components :: bootstrap-links}"></div>
-    <style>
-      .form-switch {
-        display: flex;
-        align-items: center;
-        padding-left: 0;
-      }
 
-      .form-switch input[type="checkbox"] {
-        margin: 0 10px;
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <div th:replace="~{components :: bootstrap-links}"></div>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+  <style>
 
-  <body>
-    <div th:replace="~{components :: toggle-color-modes}"></div>
-    <div th:replace="~{components :: navbar}"></div>
-    <div class="mydivform">
-      <form action="/saveEdit" th:object="${account}" method="post">
-        <div class="form-group">
-          <label for="id">ID</label>
-          <input
-            type="number"
-            class="form-control"
-            id="id"
-            name="id"
-            th:field="*{accountId}"
-            readonly
-          />
+    .form-switch .form-check-input {
+      width: 40px;
+      height: 20px;
+      padding-left: 0px;
+    }
+
+    .form-switch .form-check-input[type="checkbox"] {
+      background-color: red;
+    }
+
+    .form-switch .form-check-input[type="checkbox"]:checked {
+      background-color: green;
+    }
+
+    /* .form-switch {
+      display: flex;
+      align-items: center;
+      padding-left: 0;
+    }
+
+    .form-switch input[type="checkbox"] {
+      margin: 0 10px;
+    } */
+  </style>
+
+</head>
+
+<body>
+  <div th:replace="~{components :: toggle-color-modes}"></div>
+  <div th:replace="~{components :: navbar}"></div>
+  <section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="card text-black mx-auto" style="border-radius: 25px; max-width: 70%; max-height: 95%;">
+          <h1 class="text-center fw-bold mb-5 mx-1 mx-md-4 mt-4">Edit Account</h1>
+          <div class="card-body p-md-2">
+            <div class="row justify-content-center">
+
+              <form action="/saveEdit" th:object="${account}" method="post">
+
+                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                  <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input type="number" style="width: 400px;" readonly th:field="*{accountId}" id="id" name="id"
+                      class="form-control" placeholder="ID" />
+                    <label class="form-label" for="id">ID</label>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                  <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input type="text" style="width: 400px;" th:field="*{accountName}" id="name" name="name"
+                      class="form-control" placeholder="Name" />
+                    <label class="form-label" for="name">Name</label>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                  <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input type="email" style="width: 400px;" th:field="*{email}" id="email" name="email"
+                      class="form-control" placeholder="Email" />
+                    <label class="form-label" for="email">Email</label>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                  <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input type="tel" id="phone" name="phone" th:field="*{phone}" style="width: 400px;"
+                      class="form-control" placeholder="Phone Number" />
+                    <label class="form-label" for="phone">Phone Number</label>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                  <i class="fas fa-home fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input type="text" style="width: 400px;" th:field="*{address}" id="address" name="address"
+                      class="form-control" placeholder="Address" />
+                    <label class="form-label" for="address">Address</label>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                  <i class="fas fa-money-bill fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input type="number" style="width: 400px;" th:field="*{balance}" id="bal" name="bal" step="0.01"
+                      class="form-control" placeholder="Address" />
+                    <label class="form-label" for="bal">Balance</label>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                  <div class="form-floating form-switch" id="statusdiv">
+                    <span style="padding-right: 45px;">Inactive</span>
+                    <input class="form-check-input" type="checkbox" role="switch" data-toggle="toggle"
+                      th:checked="${account.status.equalsIgnoreCase('active')}" name="status" id="status"
+                      data-on="active" data-off="inactive" data-onstyle="success" data-offstyle="danger" />
+                    <span>Active</span>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                  <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+
         </div>
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="custname"
-            name="custname"
-            th:field="*{accountName}"
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            th:field="*{email}"
-            name="email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="text"
-            class="form-control"
-            id="phone"
-            th:field="*{phone}"
-            name="phone"
-          />
-        </div>
-        <div class="form-group">
-          <label for="address">Address</label>
-          <input
-            type="text"
-            class="form-control"
-            id="address"
-            name="address"
-            th:field="*{address}"
-          />
-        </div>
-        <div class="form-group">
-          <label for="bal">Balance</label>
-          <input
-            type="number"
-            class="form-control"
-            id="bal"
-            name="bal"
-            th:field="*{balance}"
-          />
-        </div>
-        <label for="statusdiv">Status</label>
-        <div class="form-group form-switch" id="statusdiv">
-          <span>Inactive</span>
-          <input
-            class="form-check-input"
-            type="checkbox"
-            role="switch"
-            data-toggle="toggle"
-            th:checked="${account.status.equalsIgnoreCase('active')}"
-            name="status"
-            id="status"
-            data-on="active"
-            data-off="inactive"
-            data-onstyle="success"
-            data-offstyle="danger"
-          />
-          <span>Active</span>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      </div>
     </div>
-  </body>
+  </section>
+</body>
+
 </html>

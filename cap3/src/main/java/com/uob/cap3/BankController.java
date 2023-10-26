@@ -189,6 +189,10 @@ public class BankController {
         resetState();
         Account acc = ar.findById(id).get();
         m.addAttribute("acc", acc);
+        String accName = acc.getAccountName();
+        double accBal = acc.getBalance();
+        m.addAttribute("accName", accName);
+        m.addAttribute("accBal", accBal);
         return "close";
     }
 

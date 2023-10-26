@@ -61,7 +61,7 @@
                   <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
                     <input type="text" style="background-color: white; width: 400px;" th:field="*{accountName}" id="name" name="name"
-                      class="form-control" placeholder="Name" />
+                      class="form-control" placeholder="Name" required />
                     <label class="form-label" for="name">Name</label>
                   </div>
                 </div>
@@ -70,7 +70,7 @@
                   <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
                     <input type="email" style="background-color: white; width: 400px;" th:field="*{email}" id="email" name="email"
-                      class="form-control" placeholder="Email" />
+                      class="form-control" placeholder="Email" required/>
                     <label class="form-label" for="email">Email</label>
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                   <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
                     <input type="tel" id="phone" name="phone" th:field="*{phone}" style="background-color: white; width: 400px;"
-                      class="form-control" placeholder="Phone Number" />
+                      class="form-control" placeholder="Phone Number" required/>
                     <label class="form-label" for="phone">Phone Number</label>
                   </div>
                 </div>
@@ -87,7 +87,7 @@
                   <i class="fas fa-home fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
                     <input type="text" style="background-color: white; width: 400px;" th:field="*{address}" id="address" name="address"
-                      class="form-control" placeholder="Address" />
+                      class="form-control" placeholder="Address" required/>
                     <label class="form-label" for="address">Address</label>
                   </div>
                 </div>
@@ -95,7 +95,7 @@
                   <i class="fas fa-money-bill fa-lg me-3 fa-fw"></i>
                   <div class="form-floating">
                     <input type="number" style="background-color: white; width: 400px;" th:field="*{balance}" id="bal" name="bal" step="0.01"
-                      class="form-control" placeholder="Address" />
+                      class="form-control" placeholder="Address" readonly/>
                     <label class="form-label" for="bal">Balance</label>
                   </div>
                 </div>

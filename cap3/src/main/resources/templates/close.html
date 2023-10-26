@@ -13,6 +13,10 @@
         <div>
             <label for="aid">Account ID:</label>
             <input type="number" class="form-control" id="accountId" name="accountId" th:field="*{accountId}" readonly>
+            <label for="accName">Customer Name:</label>
+            <input type="text" class="form-control" id="accName" name="accName" th:field="*{accountName}" readonly>
+            <label for="accBal">Account Balance:</label>
+            <input type="number" class="form-control" id="accBal" name="accBal" th:field="*{balance}" readonly>
         </div>
         <div>
             <p>Do you want to close Account of ID</p>

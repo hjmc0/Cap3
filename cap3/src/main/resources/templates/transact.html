@@ -25,7 +25,7 @@
             <div class="toast-header">
               <strong class="me-auto">Error</strong>
             </div>
-            <div class="toast-body">Too much to withdraw! Please try again.</div>
+            <div class="toast-body">Insufficient Balance! Please try again.</div>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
             <option value="deposit">Deposit</option>
         <br>
         <label for="amt">Please Input Transaction Amount:</label>
-        <input type="number" step="0.01" id="amt" name="amt">
+        <input type="number" step="0.01" id="amt" name="amt" min="0.01" required>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </body>

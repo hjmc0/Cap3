@@ -27,6 +27,7 @@ import com.uob.cap3.repo.TellerRepo;
 import com.uob.cap3.repo.TransactionRepo;
 import com.uob.cap3.service.AccountService;
 import com.uob.cap3.service.TellerService;
+import com.uob.cap3.service.TransactionService;
 
 @Controller
 public class BankController {
@@ -41,12 +42,6 @@ public class BankController {
     AccountRepo ar;
 
     @Autowired
-    AccountService as;
-
-    @Autowired
-    TellerService ts;
-
-    @Autowired
     TransactionRepo tr;
 
     @Autowired
@@ -54,6 +49,15 @@ public class BankController {
 
     @Autowired
     TellerRepo tellerRepo;
+
+    @Autowired
+    AccountService as;
+
+    @Autowired
+    TellerService ts;
+
+    @Autowired
+    TransactionService tran_s;
 
     @RequestMapping("/")
     public String landing() {
@@ -133,9 +137,13 @@ public class BankController {
     }
 
     @RequestMapping("/transaction/{id}")
-    public String viewTransactions(Model m, @PathVariable Long id) {
+    public String viewTransactions(Model m, @PathVariable Long id,
+            @RequestParam(value = "query", required = false) String query) {
         m.addAttribute("transactions", tr.findByAccountId(id));
-        return "transactions";
+        if (query != null && !query.trim().isEmpty()) {
+            m.addAttribute("transactions", (List<Transaction>) tran_s.searchTransaction(id, query));
+        }
+        return "transaction";
     }
 
     @RequestMapping("/createteller")

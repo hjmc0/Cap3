@@ -1,6 +1,5 @@
 package com.uob.cap3;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,14 +14,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(
                 auth -> auth.requestMatchers("/css/**", "/js/**", "/fonts/**", "/images/**", "/scss/**").permitAll()
                         .requestMatchers("/", "/logout", "/login").permitAll()
-                        .requestMatchers("/view", "/edit/*","/saveEdit", "/withdraw/*", "/deposit/*", "/transact/*","/transaction/*",
-                                "/createteller", "/createaccount", "/savetransact","/adding","/addaccount", "/delete/*", "/close", "/deleteteller/*", "/deleteteller")
+                        .requestMatchers("/view", "/edit/*", "/saveEdit", "/withdraw/*", "/deposit/*", "/transact/*",
+                                "/transaction/*", "/transaction", "/createteller", "/createaccount", "/savetransact",
+                                "/adding", "/addaccount", "/delete/*", "/close", "/deleteteller/*", "/deleteteller")
                         .authenticated()
                         .requestMatchers("/**").anonymous())
                 .formLogin(fl -> fl.loginPage("/login").successForwardUrl("/view"))

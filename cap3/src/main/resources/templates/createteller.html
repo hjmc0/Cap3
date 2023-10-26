@@ -6,6 +6,10 @@
     <title>Document</title>
     <div th:replace="~{components :: bootstrap-links}"></div>
     <div th:replace="~{components :: datatable-links}"></div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <script>
       $(document).ready(function () {
         $("#dataTable").DataTable({
@@ -40,12 +44,19 @@
           <td>Password:</td>
           <td><input type="text" th:field="*{tellerPass}" required /></td>
         </tr>
-  
+
         <tr>
           <td>
-            <div> <th:block th:each="role: ${tellerRoles}">
-                <input type="radio" th:field="*{tellerRoles}" th:text="${role.roleName}"
-                  th:value="${role.roleId}" class="m-2" required />
+            <div>
+              <th:block th:each="role: ${tellerRoles}">
+                <input
+                  type="radio"
+                  th:field="*{tellerRoles}"
+                  th:text="${role.roleName}"
+                  th:value="${role.roleId}"
+                  class="m-2"
+                  required
+                />
               </th:block>
             </div>
           </td>
@@ -83,14 +94,11 @@
           <tr th:each="u:${tellerList}">
             <td th:text="${u.tellerId}"></td>
             <td th:text="${u.tellerName}"></td>
-            <td th:text="${u.tellerRoles}"></td>
-
+            <td th:text="${u.tellerRoles.iterator().next()}"></td>
             <td>
-              <a
-                style="color: red"
-                th:href="@{'/deleteteller/' + ${u.tellerId}}"
-                ><i class="fas fa-trash"></i>delete</a
-              >
+              <a th:href="@{'/deleteteller/' + ${u.tellerId}}"
+                ><i class="fas fa-trash-alt"></i
+              ></a>
             </td>
           </tr>
         </tbody>

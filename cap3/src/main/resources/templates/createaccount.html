@@ -51,10 +51,10 @@
     <div style="padding-left: 180px; padding-right: 180px">
       <div class="container-fluid">
         <div class="row">
-          <div class="col" style="min-height: 500px">
+          <div class="col">
             <h1 class="text-center">Account Entry Form</h1>
             <div
-              class="justify-content-center align-items-center h-100"
+              class="justify-content-center align-items-center d-flex flex-row"
               style="padding-top: 9px"
             >
               <form
@@ -63,89 +63,110 @@
                 method="get"
                 th:object="${account}"
               >
-                <input type="text" th:field="*{accountId}" hidden />
-                <input type="number" th:field="*{balance}" value="0" hidden />
-                <input
-                  type="text"
-                  th:field="*{status}"
-                  th:value="active"
-                  hidden
-                />
+  
+                  <table>
+                    <tr class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                      <td>
+                        <input type="text" th:field="*{accountId}" hidden />
+                        <input
+                          type="number"
+                          th:field="*{balance}"
+                          value="0"
+                          hidden
+                        />
+                        <input
+                          type="text"
+                          th:field="*{status}"
+                          th:value="active"
+                          hidden
+                        />
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      </td>
+                      <td>
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            style="width: 350px"
+                            th:field="*{accountName}"
+                            id="form3Example1c"
+                            class="form-control"
+                            placeholder="Name"
+                            required
+                          />
+                          <label class="form-label" for="form3Example1c"
+                            >Name</label
+                          >
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                      <td>
+                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      </td>
+                      <td>
+                        <div class="form-floating">
+                          <input
+                            type="email"
+                            style="width: 350px"
+                            th:field="*{email}"
+                            id="form3Example3c"
+                            class="form-control"
+                            placeholder="Email"
+                            required
+                          />
+                          <label class="form-label" for="form3Example3c"
+                            >Email</label
+                          >
+                        </div>
+                      </td>
+                    </tr>
 
-           
-                <div class="d-flex flex-row align-items-center mb-4">
-                  <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input
-                      type="text"
-                      style="width: 350px"
-                      th:field="*{accountName}"
-                      id="form3Example1c"
-                      class="form-control"
-                      placeholder="Name"
-                      required
-                    />
-                    <label class="form-label" for="form3Example1c">Name</label>
-                  </div>
-                </div>
-         
-
-                <div class="d-flex flex-row align-items-center mb-4">
-                  <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input
-                      type="email"
-                      style="width: 350px"
-                      th:field="*{email}"
-                      id="form3Example3c"
-                      class="form-control"
-                      placeholder="Email"
-                      required
-                    />
-                    <label class="form-label" for="form3Example3c">Email</label>
-                  </div>
-                </div>
-
-                <div class="d-flex flex-row align-items-center mb-4">
-                  <i class="fas fa-home fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input
-                      type="text"
-                      style="width: 350px"
-                      th:field="*{address}"
-                      id="form3Example4c"
-                      class="form-control"
-                      placeholder="Address"
-                      required
-                    />
-                    <label class="form-label" for="form3Example4c"
-                      >Address</label
-                    >
-                  </div>
-                </div>
-
-                <div class="d-flex flex-row align-items-center mb-4">
-                  <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input
-                      type="tel"
-                      id="form3Example4cd"
-                      th:field="*{phone}"
-                      style="width: 350px"
-                      class="form-control"
-                      placeholder="Phone Number"
-                      required
-                    />
-                    <label class="form-label" for="form3Example4cd"
-                      >Phone Number</label
-                    >
-                  </div>
-                </div>
-
+                    <tr class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                      <td>
+                        <i class="fas fa-home fa-lg me-3 fa-fw"></i>
+                      </td>
+                      <td>
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            style="width: 350px"
+                            th:field="*{address}"
+                            id="form3Example4c"
+                            class="form-control"
+                            placeholder="Address"
+                            required
+                          />
+                          <label class="form-label" for="form3Example4c"
+                            >Address</label
+                          >
+                        </div>
+                      </td>
+                    </tr>
+                    <tr class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
+                      <td>
+                        <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                      </td>
+                      <td>
+                        <div class="form-floating">
+                          <input
+                            type="tel"
+                            id="form3Example4cd"
+                            th:field="*{phone}"
+                            style="width: 350px"
+                            class="form-control"
+                            placeholder="Phone Number"
+                            required
+                          />
+                          <label class="form-label" for="form3Example4cd"
+                            >Phone Number</label
+                          >
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+          
                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                  <button type="submit" class="btn btn-primary">
-                    Create
-                  </button>
+                  <button type="submit" class="btn btn-primary">Create</button>
                 </div>
               </form>
             </div>
@@ -153,7 +174,7 @@
           <!-- TABLE FROM HERE -->
           <div
             class="col-md-14 col-lg-8 col-xl-8 d-flex order-1 order-lg-2"
-            style="overflow-x: auto;"
+            style="overflow-x: auto"
           >
             <div class="col" style="min-height: 500px">
               <h1 class="text-center">Record of Accounts</h1>

@@ -48,7 +48,7 @@
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
-    <div style="padding-left: 180px; padding-right: 180px">
+    <div style="padding-left: 20px; padding-right: 20px">
       <div class="container-fluid">
         <div class="row">
           <div class="col">
@@ -63,121 +63,136 @@
                 method="get"
                 th:object="${account}"
               >
-  
-                  <table>
-                    <tr class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                      <td>
-                        <input type="text" th:field="*{accountId}" hidden />
-                        <input
-                          type="number"
-                          th:field="*{balance}"
-                          value="0"
-                          hidden
-                        />
+                <table>
+                  <tr
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <td>
+                      <input type="text" th:field="*{accountId}" hidden />
+                      <input
+                        type="number"
+                        th:field="*{balance}"
+                        value="0"
+                        hidden
+                      />
+                      <input
+                        type="text"
+                        th:field="*{status}"
+                        th:value="active"
+                        hidden
+                      />
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    </td>
+                    <td>
+                      <div class="form-floating">
                         <input
                           type="text"
-                          th:field="*{status}"
-                          th:value="active"
-                          hidden
+                          style="width: 350px"
+                          th:field="*{accountName}"
+                          id="form3Example1c"
+                          class="form-control"
+                          placeholder="Name"
+                          required
                         />
-                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                      </td>
-                      <td>
-                        <div class="form-floating">
-                          <input
-                            type="text"
-                            style="width: 350px"
-                            th:field="*{accountName}"
-                            id="form3Example1c"
-                            class="form-control"
-                            placeholder="Name"
-                            required
-                          />
-                          <label class="form-label" for="form3Example1c"
-                            >Customer Name</label
-                          >
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                      <td>
-                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                      </td>
-                      <td>
-                        <div class="form-floating">
-                          <input
-                            type="email"
-                            style="width: 350px"
-                            th:field="*{email}"
-                            id="form3Example3c"
-                            class="form-control"
-                            placeholder="Email"
-                            required
-                          />
-                          <label class="form-label" for="form3Example3c"
-                            >Email</label
-                          >
-                        </div>
-                      </td>
-                    </tr>
+                        <label class="form-label" for="form3Example1c"
+                          >Customer Name</label
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <td>
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    </td>
+                    <td>
+                      <div class="form-floating">
+                        <input
+                          type="email"
+                          style="width: 350px"
+                          th:field="*{email}"
+                          id="form3Example3c"
+                          class="form-control"
+                          placeholder="Email"
+                          required
+                        />
+                        <label class="form-label" for="form3Example3c"
+                          >Email</label
+                        >
+                      </div>
+                    </td>
+                  </tr>
 
-                    <tr class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                      <td>
-                        <i class="fas fa-home fa-lg me-3 fa-fw"></i>
-                      </td>
-                      <td>
-                        <div class="form-floating">
-                          <input
-                            type="text"
-                            style="width: 350px"
-                            th:field="*{address}"
-                            id="form3Example4c"
-                            class="form-control"
-                            placeholder="Address"
-                            required
-                          />
-                          <label class="form-label" for="form3Example4c"
-                            >Address</label
-                          >
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                      <td>
-                        <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
-                      </td>
-                      <td>
-                        <div class="form-floating">
-                          <input
-                            type="tel"
-                            id="form3Example4cd"
-                            th:field="*{phone}"
-                            style="width: 350px"
-                            class="form-control"
-                            placeholder="Phone Number"
-                            required
-                          />
-                          <label class="form-label" for="form3Example4cd"
-                            >Phone Number</label
-                          >
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-          
+                  <tr
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <td>
+                      <i class="fas fa-home fa-lg me-3 fa-fw"></i>
+                    </td>
+                    <td>
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          style="width: 350px"
+                          th:field="*{address}"
+                          id="form3Example4c"
+                          class="form-control"
+                          placeholder="Address"
+                          required
+                        />
+                        <label class="form-label" for="form3Example4c"
+                          >Address</label
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <td>
+                      <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                    </td>
+                    <td>
+                      <div class="form-floating">
+                        <input
+                          type="tel"
+                          id="form3Example4cd"
+                          th:field="*{phone}"
+                          style="width: 350px"
+                          class="form-control"
+                          placeholder="Phone Number"
+                          required
+                        />
+                        <label class="form-label" for="form3Example4cd"
+                          >Phone Number</label
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                  <button type="submit" class="btn btn-primary">Create</button>
+                  <button type="submit" class="btn btn-primary">
+                    Create Account
+                  </button>
                 </div>
               </form>
             </div>
           </div>
-          <!-- TABLE FROM HERE -->
-          <div
-            class="col-md-14 col-lg-8 col-xl-8 d-flex order-1 order-lg-2"
-            style="overflow-x: auto"
-          >
-            <div class="col" style="min-height: 500px">
-              <h1 class="text-center">Record of Accounts</h1>
+
+          <!-- Table Management of Accounts -->
+          <div class="col-8">
+            <h1 class="text-center">Record of Accounts</h1>
+            <div
+              class="mydivlist"
+              style="
+                width: 100%;
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+                margin: 20px auto;
+                flex: 1;
+              "
+            >
               <table
                 class="table table-striped"
                 id="dataTable"

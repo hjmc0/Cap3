@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Make a Transaction</title>
     <div th:replace="~{components :: bootstrap-links}"></div>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
@@ -30,90 +34,114 @@
       </div>
     </div>
 
-    <h1 class="text-center">
-      Account Transaction Form
-    </h1>
-    <div class="d-flex justify-content-center align-items-center h-100">
-      <div style="border-radius: 25px; max-width: 20%; max-height: 95%">
-        <form action="/savetransact" th:object="${accToEdit}">
-          <table class="table table-striped">
-            <tr>
-              <td>
-                <label for="aid">Account ID:</label>
-              </td>
-              <td style="text-align: right;">
-                <input
-                  type="number"
-                  id="aid"
-                  name="aid"
-                  th:field="*{accountId}"
-                  readonly
-                />
-                <input
-                  type="hidden"
-                  id="id"
-                  name="id"
-                  th:value="${accToEdit.accountId}"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="accName">Customer Name:</label>
-              </td>
-              <td style="text-align: right;">
-                <input
-                  type="text"
-                  id="accName"
-                  name="accName"
-                  th:field="*{accountName}"
-                  readonly
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="accBal">Account Balance:</label>
-              </td>
-              <td style="text-align: right;">
-                <input
-                  type="number"
-                  id="accBal"
-                  name="accBal"
-                  th:field="*{balance}"
-                  readonly
-                />
-              </td>
-            </tr>
-          </table>
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div style="border-radius: 25px; max-width: 70%; max-height: 95%">
+          <h1 class="text-center">Account Transaction Form</h1>
+          <div class="card-body p-md-2">
+            <div class="row justify-content-center">
+              <form action="/savetransact" th:object="${accToEdit}">
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input
+                      type="number"
+                      style="width: 400px"
+                      th:field="*{accountId}"
+                      id="aid"
+                      name="aid"
+                      class="form-control"
+                      placeholder="ID"
+                      readonly
+                    />
+                    <input
+                      type="hidden"
+                      id="id"
+                      name="id"
+                      th:value="${accToEdit.accountId}"
+                    />
+                    <label class="form-label" for="aid">ID</label>
+                  </div>
+                </div>
 
-          <label for="transType">Please Select Transaction Type:</label>
-          <select id="transType" name="transType">
-            <option value="deposit">Deposit</option>
-            <option value="withdraw">Withdraw</option>
-          </select>
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      style="width: 400px"
+                      th:field="*{accountName}"
+                      id="accName"
+                      name="accName"
+                      class="form-control"
+                      placeholder="Name"
+                      readonly
+                    />
+                    <label class="form-label" for="accName">Name</label>
+                  </div>
+                </div>
 
-          <label for="amt" style="margin-top: 10px"
-            >Please Input Transaction Amount:</label
-          >
-          <input
-            type="number"
-            step="0.01"
-            id="amt"
-            name="amt"
-            min="0.01"
-            required
-          />
-          <div style="text-align: right">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="margin-top: 10px"
-            >
-              Submit
-            </button>
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <i class="fas fa-money-bill fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input
+                      type="number"
+                      style="width: 400px"
+                      th:field="*{balance}"
+                      id="accBal"
+                      name="accBal"
+                      class="form-control"
+                      placeholder="Name"
+                      readonly
+                    />
+                    <label class="form-label" for="accBal"
+                      >Account Balance</label
+                    >
+                  </div>
+                </div>
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <label for="transType">Please Select Transaction Type:</label>
+                  <select id="transType" name="transType">
+                    <option value="deposit">Deposit</option>
+                    <option value="withdraw">Withdraw</option>
+                  </select>
+                </div>
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <label for="amt">Please Input Transaction Amount:</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    id="amt"
+                    name="amt"
+                    min="0.01"
+                    required
+                  />
+                </div>
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="margin-top: 10px"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </body>

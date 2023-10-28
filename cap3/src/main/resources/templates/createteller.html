@@ -29,80 +29,123 @@
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
-    <h2>Teller Entry Form</h2>
-    <form th:action="@{/adding}" method="get" id="form1" th:object="${teller}">
-      <table class="table table-striped">
-        <tr hidden>
-          <td hidden>Teller Id:</td>
-          <td><input type="text" th:field="*{tellerId}" readonly hidden /></td>
-        </tr>
-        <tr>
-          <td>Teller Name:</td>
-          <td><input type="text" th:field="*{tellerName}" required /></td>
-        </tr>
-        <tr>
-          <td>Password:</td>
-          <td><input type="password" th:field="*{tellerPass}" required /></td>
-        </tr>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="text-center">Teller Entry Form</h1>
+          <div
+            class="row d-flex justify-content-center align-items-center h-100"
+          >
+            <div style="border-radius: 25px; max-width: 20%; max-height: 95%">
+              <form
+                th:action="@{/adding}"
+                method="get"
+                id="form1"
+                th:object="${teller}"
+              >
+                <table class="table table-striped">
+                  <tr hidden>
+                    <td hidden>Teller Id:</td>
+                    <td>
+                      <input
+                        type="text"
+                        th:field="*{tellerId}"
+                        readonly
+                        hidden
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Teller Name:</td>
+                    <td style="text-align: right">
+                      <input type="text" th:field="*{tellerName}" required />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Password:</td>
+                    <td style="text-align: right">
+                      <input
+                        type="password"
+                        th:field="*{tellerPass}"
+                        required
+                      />
+                    </td>
+                  </tr>
 
-        <tr>
-          <td>
-            <div>
-              <th:block th:each="role: ${tellerRoles}">
-                <input
-                  type="radio"
-                  th:field="*{tellerRoles}"
-                  th:text="${role.roleName}"
-                  th:value="${role.roleId}"
-                  class="m-2"
-                  required
-                />
-              </th:block>
+                  <tr>
+                    <td>
+                      <div>
+                        <th:block th:each="role: ${tellerRoles}">
+                          <input
+                            type="radio"
+                            th:field="*{tellerRoles}"
+                            th:text="${role.roleName}"
+                            th:value="${role.roleId}"
+                            class="m-2"
+                            required
+                          />
+                        </th:block>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <div style="text-align: right">
+                  <button
+                    type="submit"
+                    form="form1"
+                    value="Submit"
+                    class="btn btn-primary"
+                  >
+                    Create Teller
+                  </button>
+                </div>
+              </form>
             </div>
-          </td>
-        </tr>
-      </table>
-      <button type="submit" form="form1" value="Submit">Create Teller</button>
-    </form>
+          </div>
+        </div>
 
-    <!-- Table Management of Tellers -->
-    <div
-      class="mydivlist"
-      style="
-        width: 85%;
-        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-        margin: 20px auto;
-        flex: 1;
-      "
-    >
-      <table
-        class="table table-striped"
-        id="dataTable"
-        data-page-length="10"
-        data-order='[[0, "asc"]]'
-      >
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col" style="width: 5%">Teller Id</th>
-            <th scope="col" style="width: 5%">Teller Name</th>
-            <th scope="col" style="width: 5%">Teller Role</th>
-            <th scope="col" style="width: 5%">Action</th>
-          </tr>
-        </thead>
+        <!-- Table Management of Tellers -->
+        <div class="col-md-6">
+          <div
+            class="mydivlist"
+            style="
+              width: 85%;
+              box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+              margin: 20px auto;
+              flex: 1;
+            "
+          >
+            <table
+              class="table table-striped"
+              id="dataTable"
+              data-page-length="10"
+              data-order='[[0, "asc"]]'
+            >
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" style="width: 5%">Teller Id</th>
+                  <th scope="col" style="width: 5%">Teller Name</th>
+                  <th scope="col" style="width: 5%">Teller Role</th>
+                  <th scope="col" style="width: 5%">Action</th>
+                </tr>
+              </thead>
 
-        <tbody>
-          <tr th:each="u:${tellerList}">
-            <td th:text="${u.tellerId}"></td>
-            <td th:text="${u.tellerName}"></td>
-            <td th:text="${u.tellerRoles.iterator().next()}"></td>
-            <td>
-              <a th:href="@{'/deleteteller/' + ${u.tellerId}}"
-                ><i class="fas fa-trash-alt"></i
-              ></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <tbody>
+                <tr th:each="u:${tellerList}">
+                  <td th:text="${u.tellerId}"></td>
+                  <td th:text="${u.tellerName}"></td>
+                  <td th:text="${u.tellerRoles.iterator().next()}"></td>
+                  <td>
+                    <a th:href="@{'/deleteteller/' + ${u.tellerId}}"
+                      ><i class="fas fa-trash-alt"></i
+                    ></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

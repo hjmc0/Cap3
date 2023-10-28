@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http:www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <div th:replace="~{components :: bootstrap-links}"></div>
-</head>
-<body>
+  </head>
+  <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
     <form action="/deleteteller" th:object="${teller}">
-        <div>
-            <label for="tellerId">Teller ID:</label>
-            <input type="number" class="form-control" id="tellerId" name="tellerId" th:field="*{tellerId}" readonly>
-        </div>
-        <div>
-            <p>Do you want to delete Teller of ID:<span id="tellerId"></span></p>
-        </div>
-        <button type="submit" id="tchoice" name="tchoice" value="yes">Yes</button>
-        <button type="submit" id="tchoice" name="tchoice" value="no">No</button>
+      <div>
+        <label for="tellerId">Teller ID:</label>
+        <input
+          type="number"
+          class="form-control"
+          id="tellerId"
+          name="tellerId"
+          th:field="*{tellerId}"
+          readonly
+        />
+      </div>
+      <div>
+        <p>Do you want to delete Teller of ID:<span id="tellerId"></span></p>
+      </div>
+      <button type="submit" id="tchoice" name="tchoice" value="yes">Yes</button>
+      <button type="submit" id="tchoice" name="tchoice" value="no">No</button>
     </form>
-</body>
+  </body>
 </html>

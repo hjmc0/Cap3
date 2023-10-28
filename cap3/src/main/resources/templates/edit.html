@@ -1,127 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <div th:replace="~{components :: bootstrap-links}"></div>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .form-switch .form-check-input {
+        width: 40px;
+        height: 20px;
+        padding-left: 0px;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <div th:replace="~{components :: bootstrap-links}"></div>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
-  <style>
+      .form-switch .form-check-input[type="checkbox"] {
+        background-color: red;
+      }
 
-    .form-switch .form-check-input {
-      width: 40px;
-      height: 20px;
-      padding-left: 0px;
-    }
+      .form-switch .form-check-input[type="checkbox"]:checked {
+        background-color: green;
+      }
 
-    .form-switch .form-check-input[type="checkbox"] {
-      background-color: red;
-    }
+    </style>
+  </head>
 
-    .form-switch .form-check-input[type="checkbox"]:checked {
-      background-color: green;
-    }
-
-    /* .form-switch {
-      display: flex;
-      align-items: center;
-      padding-left: 0;
-    }
-
-    .form-switch input[type="checkbox"] {
-      margin: 0 10px;
-    } */
-  </style>
-
-</head>
-
-<body>
-  <div th:replace="~{components :: toggle-color-modes}"></div>
-  <div th:replace="~{components :: navbar}"></div>
-  <section class="vh-100" style="background-color: #eee;">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="card text-black mx-auto" style="background-color: white; border-radius: 25px; max-width: 70%; max-height: 95%;">
-          <h1 class="text-center fw-bold mb-5 mx-1 mx-md-4 mt-4">Edit Account</h1>
-          <div class="card-body p-md-2">
-            <div class="row justify-content-center">
-
-              <form action="/saveEdit" th:object="${account}" method="post">
-
-                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                  <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input type="number" style="background-color: white; width: 400px;" readonly th:field="*{accountId}" id="id" name="id"
-                      class="form-control" placeholder="ID" />
-                    <label class="form-label" for="id">ID</label>
+  <body>
+    <div th:replace="~{components :: toggle-color-modes}"></div>
+    <div th:replace="~{components :: navbar}"></div>
+    <section class="vh-100" style="background-color: #eee">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div
+            class="card text-black mx-auto"
+            style="
+              background-color: white;
+              border-radius: 25px;
+              max-width: 70%;
+              max-height: 95%;
+            "
+          >
+            <h1 class="text-center fw-bold mb-5 mx-1 mx-md-4 mt-4">
+              Edit Account
+            </h1>
+            <div class="card-body p-md-2">
+              <div class="row justify-content-center">
+                <form action="/saveEdit" th:object="${account}" method="post">
+                  <div
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
+                    <div class="form-floating">
+                      <input
+                        type="number"
+                        style="background-color: white; width: 400px"
+                        readonly
+                        th:field="*{accountId}"
+                        id="id"
+                        name="id"
+                        class="form-control"
+                        placeholder="ID"
+                      />
+                      <label class="form-label" for="id">ID</label>
+                    </div>
                   </div>
-                </div>
-                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                  <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input type="text" style="background-color: white; width: 400px;" th:field="*{accountName}" id="name" name="name"
-                      class="form-control" placeholder="Name" required />
-                    <label class="form-label" for="name">Name</label>
+                  <div
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        style="background-color: white; width: 400px"
+                        th:field="*{accountName}"
+                        id="name"
+                        name="name"
+                        class="form-control"
+                        placeholder="Name"
+                        required
+                      />
+                      <label class="form-label" for="name">Name</label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                  <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input type="email" style="background-color: white; width: 400px;" th:field="*{email}" id="email" name="email"
-                      class="form-control" placeholder="Email" required/>
-                    <label class="form-label" for="email">Email</label>
+                  <div
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-floating">
+                      <input
+                        type="email"
+                        style="background-color: white; width: 400px"
+                        th:field="*{email}"
+                        id="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="Email"
+                        required
+                      />
+                      <label class="form-label" for="email">Email</label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                  <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input type="tel" id="phone" name="phone" th:field="*{phone}" style="background-color: white; width: 400px;"
-                      class="form-control" placeholder="Phone Number" required/>
-                    <label class="form-label" for="phone">Phone Number</label>
+                  <div
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                    <div class="form-floating">
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        th:field="*{phone}"
+                        style="background-color: white; width: 400px"
+                        class="form-control"
+                        placeholder="Phone Number"
+                        required
+                      />
+                      <label class="form-label" for="phone">Phone Number</label>
+                    </div>
                   </div>
-                </div>
-                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                  <i class="fas fa-home fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input type="text" style="background-color: white; width: 400px;" th:field="*{address}" id="address" name="address"
-                      class="form-control" placeholder="Address" required/>
-                    <label class="form-label" for="address">Address</label>
+                  <div
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <i class="fas fa-home fa-lg me-3 fa-fw"></i>
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        style="background-color: white; width: 400px"
+                        th:field="*{address}"
+                        id="address"
+                        name="address"
+                        class="form-control"
+                        placeholder="Address"
+                        required
+                      />
+                      <label class="form-label" for="address">Address</label>
+                    </div>
                   </div>
-                </div>
-                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                  <i class="fas fa-money-bill fa-lg me-3 fa-fw"></i>
-                  <div class="form-floating">
-                    <input type="number" style="background-color: white; width: 400px;" th:field="*{balance}" id="bal" name="bal" step="0.01"
-                      class="form-control" placeholder="Address" readonly/>
-                    <label class="form-label" for="bal">Balance</label>
+                  <div
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <i class="fas fa-money-bill fa-lg me-3 fa-fw"></i>
+                    <div class="form-floating">
+                      <input
+                        type="number"
+                        style="background-color: white; width: 400px"
+                        th:field="*{balance}"
+                        id="bal"
+                        name="bal"
+                        step="0.01"
+                        class="form-control"
+                        placeholder="Address"
+                        readonly
+                      />
+                      <label class="form-label" for="bal">Balance</label>
+                    </div>
                   </div>
-                </div>
-                <div class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4">
-                  <div class="form-floating form-switch" id="statusdiv">
-                    <span style="padding-right: 45px;">Inactive</span>
-                    <input class="form-check-input" type="checkbox" role="switch" data-toggle="toggle"
-                      th:checked="${account.status.equalsIgnoreCase('active')}" name="status" id="status"
-                      data-on="active" data-off="inactive" data-onstyle="success" data-offstyle="danger" />
-                    <span>Active</span>
+                  <div
+                    class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                  >
+                    <div class="form-floating form-switch" id="statusdiv">
+                      <span style="padding-right: 45px">Inactive</span>
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        role="switch"
+                        data-toggle="toggle"
+                        th:checked="${account.status.equalsIgnoreCase('active')}"
+                        name="status"
+                        id="status"
+                        data-on="active"
+                        data-off="inactive"
+                        data-onstyle="success"
+                        data-offstyle="danger"
+                      />
+                      <span>Active</span>
+                    </div>
                   </div>
-                </div>
 
-                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                  <button type="submit" class="btn btn-primary">Edit</button>
-                </div>
-
-              </form>
-
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
-    </div>
-  </section>
-</body>
-
+    </section>
+  </body>
 </html>

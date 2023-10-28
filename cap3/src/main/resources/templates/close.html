@@ -1,28 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http:www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <div th:replace="~{components :: bootstrap-links}"></div>
-</head>
-<body>
+  </head>
+  <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
     <form action="/close" th:object="${acc}">
-        <div>
-            <label for="aid">Account ID:</label>
-            <input type="number" class="form-control" id="accountId" name="accountId" th:field="*{accountId}" readonly>
-            <label for="accName">Customer Name:</label>
-            <input type="text" class="form-control" id="accName" name="accName" th:field="*{accountName}" readonly>
-            <label for="accBal">Account Balance:</label>
-            <input type="number" class="form-control" id="accBal" name="accBal" th:field="*{balance}" readonly>
-        </div>
-        <div>
-            <p>Do you want to close Account of ID</p>
-        </div>
-        <button type="submit" id="dchoice" name="dchoice" value="yes">Yes</button>
-        <button type="submit" id="dchoice" name="dchoice" value="no">No</button>
+      <div>
+        <label for="aid">Account ID:</label>
+        <input
+          type="number"
+          class="form-control"
+          id="accountId"
+          name="accountId"
+          th:field="*{accountId}"
+          readonly
+        />
+        <label for="accName">Customer Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="accName"
+          name="accName"
+          th:field="*{accountName}"
+          readonly
+        />
+        <label for="accBal">Account Balance:</label>
+        <input
+          type="number"
+          class="form-control"
+          id="accBal"
+          name="accBal"
+          th:field="*{balance}"
+          readonly
+        />
+      </div>
+      <div>
+        <p>Do you want to close Account of ID</p>
+      </div>
+      <button type="submit" id="dchoice" name="dchoice" value="yes">Yes</button>
+      <button type="submit" id="dchoice" name="dchoice" value="no">No</button>
     </form>
-</body>
+  </body>
 </html>

@@ -1,56 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <div th:replace="~{components :: bootstrap-links}"></div>
-</head>
-<body>
+  </head>
+  <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
     <div th:if="${withdrawExceed}">
-        <div
-          aria-live="polite"
-          aria-atomic="true"
-          data-bs-delay="5000"
-          style="
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-          "
-        >
-          <div class="toast show" data-bs-toggle="toast" data-bs-dismiss="toast">
-            <div class="toast-header">
-              <strong class="me-auto">Error</strong>
-            </div>
-            <div class="toast-body">Insufficient Balance! Please try again.</div>
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        data-bs-delay="5000"
+        style="
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+        "
+      >
+        <div class="toast show" data-bs-toggle="toast" data-bs-dismiss="toast">
+          <div class="toast-header">
+            <strong class="me-auto">Error</strong>
           </div>
+          <div class="toast-body">Insufficient Balance! Please try again.</div>
         </div>
       </div>
+    </div>
 
-    <form action="/savetransact" th:object="${accToEdit}">
+    <h1 class="text-center">
+      Account Transaction Form
+    </h1>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div style="border-radius: 25px; max-width: 20%; max-height: 95%">
+        <form action="/savetransact" th:object="${accToEdit}">
+          <table class="table table-striped">
+            <tr>
+              <td>
+                <label for="aid">Account ID:</label>
+              </td>
+              <td style="text-align: right;">
+                <input
+                  type="number"
+                  id="aid"
+                  name="aid"
+                  th:field="*{accountId}"
+                  readonly
+                />
+                <input
+                  type="hidden"
+                  id="id"
+                  name="id"
+                  th:value="${accToEdit.accountId}"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="accName">Customer Name:</label>
+              </td>
+              <td style="text-align: right;">
+                <input
+                  type="text"
+                  id="accName"
+                  name="accName"
+                  th:field="*{accountName}"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="accBal">Account Balance:</label>
+              </td>
+              <td style="text-align: right;">
+                <input
+                  type="number"
+                  id="accBal"
+                  name="accBal"
+                  th:field="*{balance}"
+                  readonly
+                />
+              </td>
+            </tr>
+          </table>
 
-        <div>
-            <label for="aid">Account ID:</label>
-            <input type="number" class="form-control" id="aid" name="aid" th:field="*{accountId}" readonly>
-            <input type="hidden" id="id" name="id" th:value="${accToEdit.accountId}">
-            <label for="accName">Customer Name:</label>
-            <input type="text" class="form-control" id="accName" name="accName" th:field="*{accountName}" readonly>
-            <label for="accBal">Account Balance:</label>
-            <input type="number" class="form-control" id="accBal" name="accBal" th:field="*{balance}" readonly>
-        </div>
-
-        <label for="transType">Please Select Transaction Type:</label>
-        <br>
-        <select id="transType" name="transType">
-            <option value="withdraw">Withdraw</option>
+          <label for="transType">Please Select Transaction Type:</label>
+          <select id="transType" name="transType">
             <option value="deposit">Deposit</option>
-        <br>
-        <label for="amt">Please Input Transaction Amount:</label>
-        <input type="number" step="0.01" id="amt" name="amt" min="0.01" required>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</body>
+            <option value="withdraw">Withdraw</option>
+          </select>
+
+          <label for="amt" style="margin-top: 10px"
+            >Please Input Transaction Amount:</label
+          >
+          <input
+            type="number"
+            step="0.01"
+            id="amt"
+            name="amt"
+            min="0.01"
+            required
+          />
+          <div style="text-align: right">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="margin-top: 10px"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

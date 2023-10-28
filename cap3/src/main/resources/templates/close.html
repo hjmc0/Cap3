@@ -5,71 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Closing Account</title>
     <div th:replace="~{components :: bootstrap-links}"></div>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
-    <form action="/close" th:object="${acc}">
-      <h1 class="text-center">Account Closure</h1>
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div style="border-radius: 25px; max-width: 20%; max-height: 95%">
-          <table class="table table-striped">
-            <tr>
-              <td>
-                <label for="aid">Account ID:</label>
-              </td>
-              <td style="text-align: right">
-                <input
-                  type="number"
-                  id="accountId"
-                  name="accountId"
-                  th:field="*{accountId}"
-                  readonly
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="accName">Customer Name:</label>
-              </td>
-              <td style="text-align: right">
-                <input
-                  type="text"
-                  id="accName"
-                  name="accName"
-                  th:field="*{accountName}"
-                  readonly
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="accBal">Account Balance:</label>
-              </td>
-              <td style="text-align: right">
-                <input
-                  type="number"
-                  id="accBal"
-                  name="accBal"
-                  th:field="*{balance}"
-                  readonly
-                />
-              </td>
-            </tr>
-          </table>
-          <div>
-            <p>Do you want to close Account?</p>
-          </div>
-          <div style="text-align: center">
-            <button type="submit" id="dchoice" name="dchoice" value="yes">
-              Yes
-            </button>
-            <button type="submit" id="dchoice" name="dchoice" value="no">
-              No
-            </button>
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div style="border-radius: 25px; max-width: 70%; max-height: 95%">
+          <h1 class="text-center">Account Closure</h1>
+          <div class="card-body p-md-2">
+            <div class="row justify-content-center">
+              <form action="/close" th:object="${acc}">
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input
+                      type="number"
+                      style="width: 400px"
+                      th:field="*{accountId}"
+                      id="accountId"
+                      name="accountId"
+                      class="form-control"
+                      placeholder="ID"
+                      readonly
+                    />
+                    <label class="form-label" for="accountId">ID</label>
+                  </div>
+                </div>
+
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      style="width: 400px"
+                      th:field="*{accountName}"
+                      id="accName"
+                      name="accName"
+                      class="form-control"
+                      placeholder="Name"
+                      readonly
+                    />
+                    <label class="form-label" for="accName">Name</label>
+                  </div>
+                </div>
+
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  <i class="fas fa-money-bill fa-lg me-3 fa-fw"></i>
+                  <div class="form-floating">
+                    <input
+                      type="number"
+                      style="width: 400px"
+                      th:field="*{balance}"
+                      id="accBal"
+                      name="accBal"
+                      class="form-control"
+                      placeholder="Balance"
+                      readonly
+                    />
+                    <label class="form-label" for="accBal"
+                      >Account Balance</label
+                    >
+                  </div>
+                </div>
+
+                <div
+                  class="d-flex justify-content-center align-items-center mx-4 mb-3 mb-lg-4"
+                >
+                  Do you want to close account?
+                </div>
+                <div style="text-align: center">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="
+                      margin-top: 10px;
+                      background-color: green;
+                      border-color: green;
+                    "
+                    id="dchoice"
+                    name="dchoice"
+                    value="yes"
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="
+                      margin-top: 10px;
+                      background-color: red;
+                      border-color: red;
+                    "
+                    id="dchoice"
+                    name="dchoice"
+                    value="no"
+                  >
+                    No
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </body>
 </html>

@@ -25,6 +25,21 @@
       window.history.pushState("url", "Title", "/createteller");
     </script>
     <link th:href="@{/css/error_message.css}" rel="stylesheet" />
+
+    <style>
+      td i {
+        font-size: 20px;
+        margin-right: 20px;
+      }
+
+      th,
+      td {
+        text-align: center;
+      }
+      .capitalize {
+        text-transform: capitalize;
+      }
+    </style>
   </head>
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
@@ -125,10 +140,18 @@
               >
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col" style="width: 5%">Teller Id</th>
-                    <th scope="col" style="width: 5%">Teller Name</th>
-                    <th scope="col" style="width: 5%">Teller Role</th>
-                    <th scope="col" style="width: 5%">Action</th>
+                    <th scope="col" style="text-align: center; width: 5%">
+                      Teller Id
+                    </th>
+                    <th scope="col" style="text-align: center; width: 5%">
+                      Teller Name
+                    </th>
+                    <th scope="col" style="text-align: center; width: 5%">
+                      Teller Role
+                    </th>
+                    <th scope="col" style="text-align: center; width: 2%">
+                      Action
+                    </th>
                   </tr>
                 </thead>
 

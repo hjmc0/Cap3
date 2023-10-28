@@ -10,22 +10,52 @@
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
     <form action="/deleteteller" th:object="${teller}">
-      <div>
-        <label for="tellerId">Teller ID:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="tellerId"
-          name="tellerId"
-          th:field="*{tellerId}"
-          readonly
-        />
+      <h1 class="text-center">Teller Deletion</h1>
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div style="border-radius: 25px; max-width: 20%; max-height: 95%">
+          <table class="table table-striped">
+            <tr>
+              <td>
+                <label for="tellerId">Teller ID:</label>
+              </td>
+              <td style="text-align: right">
+                <input
+                  type="number"
+                  id="tellerId"
+                  name="tellerId"
+                  th:field="*{tellerId}"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="tellerId">Teller Name:</label>
+              </td>
+              <td style="text-align: right">
+                <input
+                  type="text"
+                  id="tellerName"
+                  name="tellerName"
+                  th:field="*{tellerName}"
+                  readonly
+                />
+              </td>
+            </tr>
+          </table>
+          <div>
+            <p>Do you want to delete Teller?</p>
+            <div style="text-align: center">
+              <button type="submit" id="tchoice" name="tchoice" value="yes">
+                Yes
+              </button>
+              <button type="submit" id="tchoice" name="tchoice" value="no">
+                No
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <p>Do you want to delete Teller of ID:<span id="tellerId"></span></p>
-      </div>
-      <button type="submit" id="tchoice" name="tchoice" value="yes">Yes</button>
-      <button type="submit" id="tchoice" name="tchoice" value="no">No</button>
     </form>
   </body>
 </html>

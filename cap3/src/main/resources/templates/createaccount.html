@@ -7,8 +7,8 @@
     <div th:replace="~{components :: bootstrap-links}"></div>
     <div th:replace="~{components :: datatable-links}"></div>
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
     <script>
       $(document).ready(function () {
@@ -48,7 +48,7 @@
   <body>
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
-    <section class="vh-100" style="background-color: #eee">
+    <div class="container-fluid">
       <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-lg-12 col-xl-12">
@@ -62,9 +62,7 @@
               <div class="card-body p-md-5">
                 <div class="row justify-content-center">
                   <div class="col-md-6 col-lg-4 col-xl-4 order-2 order-lg-1">
-                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                      Create Account
-                    </p>
+                    <h1 class="text-center">Account Entry Form</h1>
 
                     <form
                       class="mx-1 mx-md-2"
@@ -217,6 +215,6 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </body>
 </html>

@@ -10,40 +10,66 @@
     <div th:replace="~{components :: toggle-color-modes}"></div>
     <div th:replace="~{components :: navbar}"></div>
     <form action="/close" th:object="${acc}">
-      <div>
-        <label for="aid">Account ID:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="accountId"
-          name="accountId"
-          th:field="*{accountId}"
-          readonly
-        />
-        <label for="accName">Customer Name:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="accName"
-          name="accName"
-          th:field="*{accountName}"
-          readonly
-        />
-        <label for="accBal">Account Balance:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="accBal"
-          name="accBal"
-          th:field="*{balance}"
-          readonly
-        />
+      <h1 class="text-center">Account Closure</h1>
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div style="border-radius: 25px; max-width: 20%; max-height: 95%">
+          <table class="table table-striped">
+            <tr>
+              <td>
+                <label for="aid">Account ID:</label>
+              </td>
+              <td style="text-align: right">
+                <input
+                  type="number"
+                  id="accountId"
+                  name="accountId"
+                  th:field="*{accountId}"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="accName">Customer Name:</label>
+              </td>
+              <td style="text-align: right">
+                <input
+                  type="text"
+                  id="accName"
+                  name="accName"
+                  th:field="*{accountName}"
+                  readonly
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="accBal">Account Balance:</label>
+              </td>
+              <td style="text-align: right">
+                <input
+                  type="number"
+                  id="accBal"
+                  name="accBal"
+                  th:field="*{balance}"
+                  readonly
+                />
+              </td>
+            </tr>
+          </table>
+          <div>
+            <p>Do you want to close Account?</p>
+          </div>
+          <div style="text-align: center">
+            <button type="submit" id="dchoice" name="dchoice" value="yes">
+              Yes
+            </button>
+            <button type="submit" id="dchoice" name="dchoice" value="no">
+              No
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
-        <p>Do you want to close Account of ID</p>
-      </div>
-      <button type="submit" id="dchoice" name="dchoice" value="yes">Yes</button>
-      <button type="submit" id="dchoice" name="dchoice" value="no">No</button>
     </form>
   </body>
 </html>

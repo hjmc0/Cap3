@@ -101,42 +101,44 @@
             <th scope="col" style="text-align: center; width: 15%">Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr th:each="x:${accounts}">
-            <td th:text="${x.getAccountId()}"></td>
-            <td th:text="${x.getAccountName()}"></td>
-            <td th:text="${x.getEmail()}"></td>
-            <td th:text="${x.getPhone()}"></td>
-            <td th:text="${x.getAddress()}"></td>
-            <td th:text="'S$ '+${x.getBalance()}"></td>
-            <td th:text="${x.getStatus()}"></td>
-            <td>
-              <div sec:authorize="hasAnyAuthority('teller', 'superadmin')">
-                <a th:href="'/transact/'+${x.getAccountId()}"
-                  ><i
-                    th:if="${x.getStatus().equalsIgnoreCase('active')}"
-                    class="fas fa-exchange-alt"
-                  ></i
-                ></a>
-                <a th:href="'/transaction/'+${x.getAccountId()}"
-                  ><i class="fas fa-history"></i
-                ></a>
-                <a th:href="'/edit/'+${x.getAccountId()}"
-                  ><i
-                    th:if="${!x.getStatus().equalsIgnoreCase('closed')}"
-                    class="fas fa-pencil-alt"
-                  ></i
-                ></a>
-                <a th:href="'/delete/'+${x.getAccountId()}"
-                  ><i
-                    th:if="${!x.getStatus().equalsIgnoreCase('closed')}"
-                    class="fas fa-trash-alt"
-                  ></i
-                ></a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
+        <div sec:authorize="hasAnyAuthority('teller', 'superadmin')">
+          <tbody>
+            <tr th:each="x:${accounts}">
+              <td th:text="${x.getAccountId()}" ></td>
+              <td th:text="${x.getAccountName()}"></td>
+              <td th:text="${x.getEmail()}"></td>
+              <td th:text="${x.getPhone()}"></td>
+              <td th:text="${x.getAddress()}"></td>
+              <td th:text="'S$ '+${x.getBalance()}"></td>
+              <td th:text="${x.getStatus()}"></td>
+              <td>
+                <div sec:authorize="hasAnyAuthority('teller', 'superadmin')">
+                  <a th:href="'/transact/'+${x.getAccountId()}"
+                    ><i
+                      th:if="${x.getStatus().equalsIgnoreCase('active')}"
+                      class="fas fa-exchange-alt"
+                    ></i
+                  ></a>
+                  <a th:href="'/transaction/'+${x.getAccountId()}"
+                    ><i class="fas fa-history"></i
+                  ></a>
+                  <a th:href="'/edit/'+${x.getAccountId()}"
+                    ><i
+                      th:if="${!x.getStatus().equalsIgnoreCase('closed')}"
+                      class="fas fa-pencil-alt"
+                    ></i
+                  ></a>
+                  <a th:href="'/delete/'+${x.getAccountId()}"
+                    ><i
+                      th:if="${!x.getStatus().equalsIgnoreCase('closed')}"
+                      class="fas fa-trash-alt"
+                    ></i
+                  ></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </div>
       </table>
     </div>
   </body>
